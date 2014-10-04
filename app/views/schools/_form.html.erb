@@ -1,0 +1,74 @@
+<%= form_for(@school, :html => { :class => "form-horizontal" }) do |f| %>
+  <% if @school.errors.any? %>
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4><%= pluralize(@school.errors.count, "error") %> prohibited this school from being saved:</h4>
+
+      <ul>
+      <% @school.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :name, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :address, :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :address, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :city, :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :city, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :state, :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :state, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :zip, :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :zip, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :maplink, :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_area :maplink, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :stype, :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :stype, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :grades, :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :grades, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :website, :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :website, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit :class => "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

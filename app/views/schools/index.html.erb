@@ -1,0 +1,45 @@
+<div class="page-header">
+  <%= link_to new_school_path, :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New School
+  <% end %>
+  <h1>Listing schools</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Maplink</th>
+            <th>Stype</th>
+            <th>Grades</th>
+            <th>Website</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @schools) do |school| %>
+            <td><%= school.name %></td>
+            <td><%= school.address %></td>
+            <td><%= school.city %></td>
+            <td><%= school.state %></td>
+            <td><%= school.zip %></td>
+            <td><%= school.maplink %></td>
+            <td><%= school.stype %></td>
+            <td><%= school.grades %></td>
+            <td><%= school.website %></td>
+            <td><%= link_to 'Show', school %></td>
+        <td><%= link_to 'Edit', edit_school_path(school) %></td>
+        <td><%= link_to 'Destroy', school, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
