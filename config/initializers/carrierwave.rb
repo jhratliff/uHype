@@ -1,23 +1,43 @@
 # Configuration for Amazon S3
 CarrierWave.configure do |config|
 
+  config.enable_processing = true
+
 # For testing, upload files to local `tmp` folder.
-  if Rails.env.test? || Rails.env.development?
-    config.storage = :file
-    config.enable_processing = true
-    config.root = "#{Rails.root}/public"
-  else
-    config.fog_directory = ENV['S3_BUCKET_NAME']
+#   if Rails.env.test? || Rails.env.development?
+#     #config.storage = :file
+#     config.storage = :fog
+#     config.root = "#{Rails.root}/public"
+#   else
+    # config.fog_directory = ENV['S3_BUCKET_NAME']
+
+    config.fog_directory  = "#{Rails.env}-uhype"            # required
+    # config.fog_host       = "http://s3.amazonaws.com"            # optional, defaults to nil
+    # config.fog_public     = false # optional, defaults to true
+    config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}  # optional, defaults to {}
+
+
+
+
+    # config.fog_credentials = {
+    #     :provider => 'AWS',
+    #     :aws_access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+    #     :aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
+    #     :region => ENV['S3_REGION'],
+    #     :endpoint => ENV['S3_ENDPOINT']
+    # }
+
     config.fog_credentials = {
         :provider => 'AWS',
-        :aws_access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-        :aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-        # :region => ENV['S3_REGION'],
-        # :endpoint => ENV['S3_ENDPOINT']
+        :aws_access_key_id => 'AKIAIE2DPHLWZT5LW7NA',
+        :aws_secret_access_key => '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',
+        :region => 'us-east-1',
+        :endpoint => 'https://s3.amazonaws.com'
     }
+
 
     # To let CarrierWave work on heroku
     config.cache_dir = "#{Rails.root}/tmp/uploads"
     config.storage = :fog
-  end
+  # end
 end
