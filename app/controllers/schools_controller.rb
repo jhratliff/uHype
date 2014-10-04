@@ -1,4 +1,5 @@
 class SchoolsController < ApplicationController
+  respond_to :html, :json
   before_action :set_school, only: [:show, :edit, :update, :destroy]
 
   def index
