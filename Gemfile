@@ -22,8 +22,10 @@ gem 'hirb'
 gem 'bootstrap-generators', '~> 3.2.0'
 
 # image handlers
-gem 'carrierwave'
+gem 'mini_magick'
 gem 'fog'
+gem 'carrierwave'
+gem 'unf'
 
 group :development do
   gem 'better_errors'

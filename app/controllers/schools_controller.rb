@@ -3,7 +3,7 @@ class SchoolsController < ApplicationController
   before_action :set_school, only: [:show, :edit, :update, :destroy]
 
   def index
-    @schools = School.all
+    @schools = School.order(:id).all
     respond_with(@schools)
   end
 
@@ -27,6 +27,8 @@ class SchoolsController < ApplicationController
 
   def update
     @school.update(school_params)
+    @school.logo = params[:file]
+    @school.save
     respond_with(@school)
   end
 
@@ -41,6 +43,6 @@ class SchoolsController < ApplicationController
     end
 
     def school_params
-      params.require(:school).permit(:name, :address, :city, :state, :zip, :maplink, :stype, :grades, :website)
+      params.require(:school).permit(:name, :address, :city, :state, :zip, :maplink, :stype, :grades, :website, :logo, :logo_cache)
     end
 end

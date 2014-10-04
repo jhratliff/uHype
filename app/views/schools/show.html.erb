@@ -29,7 +29,7 @@
   <dt>Maplink:</dt>
   <dd><%= @school.maplink %></dd>
 
-  <dt>Stype:</dt>
+  <dt>Type:</dt>
   <dd><%= @school.stype %></dd>
 
   <dt>Grades:</dt>
@@ -37,5 +37,20 @@
 
   <dt>Website:</dt>
   <dd><%= @school.website %></dd>
+
+    <dt>Full-Size Logo:</dt>
+    <dd><%= image_tag(@school.logo.url) if @school.logo? %></dd>
+
+    <dt>Large Logo:</dt>
+    <dd><%= image_tag(@school.logo.large.url) if @school.logo? %></dd>
+
+    <dt>Medium Logo:</dt>
+    <dd><%= image_tag(@school.logo.medium.url) if @school.logo? %></dd>
+
+    <dt>Thumb Logo:</dt>
+    <dd><%= image_tag(@school.logo.thumb.url) if @school.logo? %></dd>
+
+    <dt>Small Logo:</dt>
+    <dd><%= image_tag(@school.logo.small.url) if @school.logo? %></dd>
 
 </dl>

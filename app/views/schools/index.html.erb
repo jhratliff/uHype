@@ -15,9 +15,10 @@
             <th>City</th>
             <th>State</th>
             <th>Zip</th>
-            <th>Stype</th>
+            <th>Type</th>
             <th>Grades</th>
-            <th>Website</th>
+          <th>Logo URL</th>
+          <th>Logo</th>
             <th></th>
         <th></th>
         <th></th>
@@ -33,7 +34,8 @@
             <td><%= school.zip %></td>
             <td><%= school.stype %></td>
             <td><%= school.grades %></td>
-            <td><%= school.website %></td>
+            <td><%= school.logo_url %></td>
+            <td><%= image_tag(school.logo.thumb.url) if school.logo? %></td>
             <td><%= link_to 'Show', school %></td>
         <td><%= link_to 'Edit', edit_school_path(school) %></td>
         <td><%= link_to 'Destroy', school, method: :delete, data: { confirm: 'Are you sure?' } %></td>
