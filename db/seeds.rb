@@ -5,8 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-user = CreateAdminService.new.call
-puts 'CREATED ADMIN USER: ' << user.email
+# user = CreateAdminService.new.call
+# puts 'CREATED ADMIN USER: ' << user.email
 
 
 School.create({"name" =>"Five Keys Adult School (Sf Sheriff's)", "address" => "70 Oak Grove", "city" => "San Francisco", "state" => "CA", "zip" => "94107", "maplink" => "https://www.google.com/maps/place/Five+Keys+Charter+School/@37.77724,-122.40218,17z/data=!3m1!4b1!4m2!3m1!1s0x808f7e2aa8797975:0x2841284abe89b00f?hl=en", "stype" => "Charter", "grades" => "9-12", "website" => "fivekeyscharter.org"})
