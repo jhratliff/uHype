@@ -12,7 +12,8 @@ CarrierWave.configure do |config|
         :provider => 'AWS',
         :aws_access_key_id => ENV['AWS_ACCESS_KEY_ID'],
         :aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
-        :region => ENV['S3_REGION']
+        :region => ENV['S3_REGION'],
+        :endpoint => ENV['S3_ENDPOINT']
     }
 
     # To let CarrierWave work on heroku
