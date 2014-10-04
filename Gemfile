@@ -17,6 +17,8 @@ gem 'sendgrid'
 gem 'simple_form'
 gem 'upmin-admin'
 
+gem 'hirb'
+
 gem 'bootstrap-generators', '~> 3.2.0'
 
 # image handlers
