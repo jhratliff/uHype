@@ -17,7 +17,6 @@
             <th>Zip</th>
             <th>Type</th>
             <th>Grades</th>
-          <th>Logo URL</th>
           <th>Logo</th>
             <th></th>
         <th></th>
@@ -34,7 +33,6 @@
             <td><%= school.zip %></td>
             <td><%= school.stype %></td>
             <td><%= school.grades %></td>
-            <td><%= school.logo_url %></td>
             <td><%= image_tag(school.logo.thumb.url) if school.logo? %></td>
             <td><%= link_to 'Show', school %></td>
         <td><%= link_to 'Edit', edit_school_path(school) %></td>
