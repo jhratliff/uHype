@@ -18,6 +18,7 @@ gem 'simple_form'
 gem 'upmin-admin'
 
 gem 'hirb'
+gem 'psych'
 
 gem 'bootstrap-generators', '~> 3.2.0'
 

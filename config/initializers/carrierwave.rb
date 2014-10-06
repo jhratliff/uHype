@@ -5,8 +5,7 @@ CarrierWave.configure do |config|
 
 # For testing, upload files to local `tmp` folder.
 #   if Rails.env.test? || Rails.env.development?
-#     #config.storage = :file
-#     config.storage = :fog
+#     config.storage = :file
 #     config.root = "#{Rails.root}/public"
 #   else
     # config.fog_directory = ENV['S3_BUCKET_NAME']
