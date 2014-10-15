@@ -17,6 +17,8 @@ gem 'sendgrid'
 gem 'simple_form'
 gem 'upmin-admin'
 
+gem 'rack-cors', :require => 'rack/cors'
+
 gem 'hirb'
 gem 'psych'
 
