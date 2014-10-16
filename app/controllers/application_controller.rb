@@ -7,12 +7,12 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  protected
+  private
 
   def configure_permitted_parameters
 # Add my attributes added to the devise User class
-    devise_parameter_sanitizer.for(:sign_up) << :username << :first_name << :last_name << :dob << :class_of
-    devise_parameter_sanitizer.for(:account_update) << :username << :first_name << :last_name << :dob << :class_of
+#     devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:username,:first_name,:last_name,:dob,:class_of)}
+#     devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:username,:first_name,:last_name,:dob,:class_of)}
   end
 
   def after_sign_out_path_for(resource_or_scope)
