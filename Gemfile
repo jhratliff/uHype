@@ -22,6 +22,8 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'hirb'
 gem 'psych'
 
+gem 'simple_token_authentication'
+
 gem 'bootstrap-generators', '~> 3.2.0'
 
 # image handlers

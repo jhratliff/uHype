@@ -30,6 +30,7 @@ class UsersController < ApplicationController
   end
 
   def me
+    @user = current_user
     render :json => current_user
   end
 
