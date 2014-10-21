@@ -3,7 +3,7 @@ class SchoolsController < ApplicationController
   before_action :set_school, only: [:show, :edit, :update, :destroy]
 
   def index
-    @schools = School.order(:id).all
+    @schools = School.order(:id).first(30)
     respond_with(@schools)
   end
 
