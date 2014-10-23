@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :followed_schools, :through => :follow_schools, :source => :school
   has_many :comments
   has_many :snapshots
+  has_many :sent_messages, :foreign_key => 'user_id', :class_name => 'Message'
+  has_many :received_messages, :through => :sent_messages, :source => 'messaged'
 
   # set up the friends relationships (people I follow)
   has_many :followings                                              # the following records I created
