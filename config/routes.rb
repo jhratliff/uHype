@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :comments
+
   resources :schools
 
   mount Upmin::Engine => '/admin'

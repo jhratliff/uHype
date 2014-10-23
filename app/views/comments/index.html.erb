@@ -1,0 +1,39 @@
+<div class="page-header">
+  <%= link_to new_comment_path, :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Comment
+  <% end %>
+  <h1>Listing comments</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>User</th>
+            <th>School</th>
+            <th>Detail</th>
+            <th>Flag count</th>
+            <th>Like count</th>
+            <th>Unlike count</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @comments) do |comment| %>
+            <td><%= comment.user %></td>
+            <td><%= comment.school %></td>
+            <td><%= comment.detail %></td>
+            <td><%= comment.flag_count %></td>
+            <td><%= comment.like_count %></td>
+            <td><%= comment.unlike_count %></td>
+            <td><%= link_to 'Show', comment %></td>
+        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
+        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
