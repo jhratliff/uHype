@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
+  mount_uploader :avatar, AvatarUploader
   acts_as_token_authenticatable
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
+
 
   belongs_to :school
   has_many :follow_schools
