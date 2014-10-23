@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :snapshots
+
   resources :comments
 
   resources :schools

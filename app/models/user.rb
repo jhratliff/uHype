@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :follow_schools
   has_many :followed_schools, :through => :follow_schools, :source => :school
   has_many :comments
+  has_many :snapshots
 
   def set_default_role
     self.role ||= :user
