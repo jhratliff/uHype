@@ -41,6 +41,24 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
+  def feed
+    # returns the user's feed
+    # feed items are the most recent items from all the schools I follow (including my own school)
+    # feed items include:
+    # User's Full Record (including High School name)
+    # Post Date
+    # likes_count
+    # unlikes_count
+    #
+    # AND
+    #
+    # the same data for all the individuals I follow (their posts)
+
+
+
+
+  end
+
   private
 
   def secure_params

@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, :if => :new_record?
 
   belongs_to :school
+  has_many :school_follows
+  has_many :schools, :through => :school_follows
 
   def set_default_role
     self.role ||= :user
