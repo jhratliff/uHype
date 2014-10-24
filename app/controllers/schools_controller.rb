@@ -32,6 +32,20 @@ class SchoolsController < ApplicationController
     respond_with(@school)
   end
 
+  def follow
+    @user = current_user
+    if params[:school_id]
+      @user.followed_schools << School.find(params[:school_id])
+    end
+  end
+
+  def unfollow
+    @user = current_user
+    if params[:school_id]
+      @user.followed_schools.destroy(School.find(params[:school_id]))
+    end
+  end
+
   def destroy
     @school.destroy
     respond_with(@school)
