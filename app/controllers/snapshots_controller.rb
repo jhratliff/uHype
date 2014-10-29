@@ -38,7 +38,7 @@ class SnapshotsController < ApplicationController
 
       #create a new tempfile named fileupload
 
-      tempfile = Tempfile.new("snapshot.jpg", Rails.root.join('tmp','snapshot-temp'))
+      tempfile = Tempfile.new("snapshot.jpg", Rails.root.join('tmp'))
       tempfile.binmode
 
       base64file = snapshot_path_params["file"].partition(',').last
