@@ -22,7 +22,7 @@ class SnapshotsController < ApplicationController
 
 
     # presupposes this format:
-    #snapshot {:user_id => "1", :like_count => 1, :unlike_count => 1, :flag_count => 1, etc., :snapshot_path {:file => "base64 encoded awesomeness", :original_filename => "my file name", :filename => "my file name"}}
+    #snapshot {:user_id => "1", :like_count => 1, :unlike_count => 1, :flag_count => 1, etc., :snapshot_path {:snapshot_file => "base64 encoded awesomeness", :original_filename => "my file name", :filename => "my file name"}}
 
     # puts "JHRLOG: inside shapshot create"
     # puts "JHRLOG: dumping params..."
@@ -37,7 +37,7 @@ class SnapshotsController < ApplicationController
     # puts "JHRLOG: new snapshot is created, lacking the image"
 
     #check if file is within picture_path
-    if params[:snapshot][:snapshot_path]["file"]
+    if params[:snapshot][:snapshot_path]["snapshot_file"]
       # puts "JHRLOG: found a file entry"
 
 
@@ -53,7 +53,7 @@ class SnapshotsController < ApplicationController
       # puts"JHRLOG: tempfile binmode set"
 
       # the buffer may be coming in with a base64 descriptor... trim it off the front
-      base64file = snapshot_path_params["file"].partition(',').last
+      base64file = snapshot_path_params["snapshot_file"].partition(',').last
 
 
       #get the file and decode it with base64 then write it to the tempfile
