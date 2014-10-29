@@ -61,7 +61,7 @@ class SnapshotsController < ApplicationController
       puts "JHRLOG: tempfile size after decode64 is #{tempfile.size}"
 
       #create a new uploaded file
-      uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => snapshot_path_params["snapshot.jpg"], :original_filename => snapshot_path_params["snapshot.jpg"])
+      uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => "snapshot.jpg", :original_filename => "snapshot.jpg")
 
       puts "JHRLOG: uploaded file object has been created "
 
