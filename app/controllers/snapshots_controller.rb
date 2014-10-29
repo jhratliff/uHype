@@ -53,7 +53,8 @@ class SnapshotsController < ApplicationController
       # puts"JHRLOG: tempfile binmode set"
 
       # the buffer may be coming in with a base64 descriptor... trim it off the front
-      base64file = snapshot_path_params["snapshot_file"].partition(',').last
+      # base64file = snapshot_path_params["snapshot_file"].partition(',').last
+      base64file = snapshot_path_params["snapshot_file"]
 
 
       #get the file and decode it with base64 then write it to the tempfile
