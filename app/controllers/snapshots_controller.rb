@@ -39,7 +39,11 @@ class SnapshotsController < ApplicationController
       #create a new tempfile named fileupload
 
       tempfile = Tempfile.new("snapshot.jpg", Rails.root.join('tmp'))
+
+      puts"JHRLOG: tempfile opened at #{tempfile.path}"
+
       tempfile.binmode
+      puts"JHRLOG: tempfile binmode set"
 
       base64file = snapshot_path_params["file"].partition(',').last
 
@@ -47,8 +51,12 @@ class SnapshotsController < ApplicationController
       #get the file and decode it with base64 then write it to the tempfile
       tempfile.write(Base64.decode64(base64file))
 
+      puts "JHRLOG: tempfile size after decode64 is #{tempfile.size}"
+
       #create a new uploaded file
       uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => snapshot_path_params["snapshot.jpg"], :original_filename => snapshot_path_params["snapshot.jpg"])
+
+      puts "JHRLOG: uploaded file object has been created "
 
       #replace photo element with the new uploaded file
       params[:snapshot][:photo] = uploaded_file
