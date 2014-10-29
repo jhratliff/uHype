@@ -26,4 +26,19 @@
   <dt>User:</dt>
   <dd><%= @snapshot.user %></dd>
 
+  <dt>Full-Size Photo:</dt>
+  <dd><%= image_tag(@snapshot.photo.url) if @snapshot.photo? %></dd>
+
+  <dt>Large Photo:</dt>
+  <dd><%= image_tag(@snapshot.photo.large.url) if @snapshot.photo? %></dd>
+
+  <dt>Medium Photo:</dt>
+  <dd><%= image_tag(@snapshot.photo.medium.url) if @snapshot.photo? %></dd>
+
+  <dt>Thumb Photo:</dt>
+  <dd><%= image_tag(@snapshot.photo.thumb.url) if @snapshot.photo? %></dd>
+
+  <dt>Small Photo:</dt>
+  <dd><%= image_tag(@snapshot.photo.small.url) if @snapshot.photo? %></dd>
+
 </dl>
