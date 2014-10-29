@@ -27,7 +27,14 @@ class SnapshotsController < ApplicationController
     puts "JHRLOG: inside shapshot create"
     puts "JHRLOG: dumping params..."
     puts params.inspect
+
     puts "JHRLOG: end dumping params..."
+
+
+    @snapshot = Snapshot.new(snapshot_params)
+    @snapshot.save
+
+    puts "JHRLOG: new snapshot is created, lacking the image"
 
     #check if file is within picture_path
     if params[:snapshot][:snapshot_path]["file"]
@@ -59,13 +66,16 @@ class SnapshotsController < ApplicationController
       puts "JHRLOG: uploaded file object has been created "
 
       #replace photo element with the new uploaded file
-      params[:snapshot][:photo] = uploaded_file
+      # params[:snapshot][:photo] = uploaded_file
+
+      @snapshot.photo = uploaded_file
+      puts "JHRLOG: snapshot has been assigned an upload image"
+      @snapshot.save
+      puts "JHRLOG: snapshot has been saved with the image"
     end
 
     puts "JHRLOG: after the base64 file processing"
 
-    @snapshot = Snapshot.new(snapshot_params)
-    @snapshot.save
     respond_with(@snapshot)
   end
 
