@@ -39,8 +39,8 @@ class SnapshotsController < ApplicationController
       #create a new uploaded file
       uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => snapshot_path_params["filename"], :original_filename => snapshot_path_params["original_filename"])
 
-      #replace picture_path with the new uploaded file
-      params[:snapshot][:snapshot_path] = uploaded_file
+      #replace photo element with the new uploaded file
+      params[:snapshot][:photo] = uploaded_file
     end
 
 
