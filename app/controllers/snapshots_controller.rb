@@ -74,7 +74,7 @@ class SnapshotsController < ApplicationController
       # puts "JHRLOG: snapshot has been assigned an upload image"
       if @snapshot.save
         # puts "JHRLOG: snapshot has been saved with the image"
-        tempfile.delete
+        tempfile.unlink
       end
 
 
