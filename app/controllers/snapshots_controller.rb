@@ -24,21 +24,21 @@ class SnapshotsController < ApplicationController
     # presupposes this format:
     #snapshot {:user_id => "1", :like_count => 1, :unlike_count => 1, :flag_count => 1, etc., :snapshot_path {:file => "base64 encoded awesomeness", :original_filename => "my file name", :filename => "my file name"}}
 
-    puts "JHRLOG: inside shapshot create"
-    puts "JHRLOG: dumping params..."
-    puts params.inspect
+    # puts "JHRLOG: inside shapshot create"
+    # puts "JHRLOG: dumping params..."
+    # puts params.inspect
 
-    puts "JHRLOG: end dumping params..."
+    # puts "JHRLOG: end dumping params..."
 
 
     @snapshot = Snapshot.new(snapshot_params)
     @snapshot.save
 
-    puts "JHRLOG: new snapshot is created, lacking the image"
+    # puts "JHRLOG: new snapshot is created, lacking the image"
 
     #check if file is within picture_path
     if params[:snapshot][:snapshot_path]["file"]
-      puts "JHRLOG: found a file entry"
+      # puts "JHRLOG: found a file entry"
 
 
       snapshot_path_params = params[:snapshot][:snapshot_path]
@@ -47,38 +47,40 @@ class SnapshotsController < ApplicationController
 
       tempfile = Tempfile.new("snapshot.jpg", Rails.root.join('tmp'))
 
-      puts"JHRLOG: tempfile opened at #{tempfile.path}"
+      # puts"JHRLOG: tempfile opened at #{tempfile.path}"
 
       tempfile.binmode
-      puts"JHRLOG: tempfile binmode set"
+      # puts"JHRLOG: tempfile binmode set"
 
-      # base64file = snapshot_path_params["file"].partition(',').last
-      base64file = snapshot_path_params["file"]
+      # the buffer may be coming in with a base64 descriptor... trim it off the front
+      base64file = snapshot_path_params["file"].partition(',').last
 
 
       #get the file and decode it with base64 then write it to the tempfile
       tempfile.write(Base64.decode64(base64file))
 
-      puts "JHRLOG: tempfile size after decode64 is #{tempfile.size}"
+      # puts "JHRLOG: tempfile size after decode64 is #{tempfile.size}"
 
       #create a new uploaded file
       uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => "snapshot.jpg", :original_filename => "snapshot.jpg")
 
-      puts "JHRLOG: uploaded file object has been created "
+      # puts "JHRLOG: uploaded file object has been created "
 
       #replace photo element with the new uploaded file
       # params[:snapshot][:photo] = uploaded_file
 
       @snapshot.photo = uploaded_file
-      puts "JHRLOG: snapshot has been assigned an upload image"
+      # puts "JHRLOG: snapshot has been assigned an upload image"
       @snapshot.save
-      puts "JHRLOG: snapshot has been saved with the image"
+      # puts "JHRLOG: snapshot has been saved with the image"
     end
 
-    puts "JHRLOG: after the base64 file processing"
+    # puts "JHRLOG: after the base64 file processing"
 
     respond_with(@snapshot)
   end
+
+
 
   def update
     @snapshot.update(snapshot_params)
