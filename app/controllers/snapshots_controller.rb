@@ -20,13 +20,20 @@ class SnapshotsController < ApplicationController
 
   def create
 
-    @snapshot = Snapshot.new(snapshot_params)
 
     # presupposes this format:
     #snapshot {:user_id => "1", :like_count => 1, :unlike_count => 1, :flag_count => 1, etc., :snapshot_path {:file => "base64 encoded awesomeness", :original_filename => "my file name", :filename => "my file name"}}
 
+    puts "JHRLOG: inside shapshot create"
+
     #check if file is within picture_path
     if params[:snapshot][:snapshot_path]["file"]
+      puts "JHRLOG: found a file entry"
+      puts "JHRLOG: dumping params..."
+      puts params.inspect
+      puts "JHRLOG: end dumping params..."
+
+
       snapshot_path_params = params[:snapshot][:snapshot_path]
 
       #create a new tempfile named fileupload
@@ -43,7 +50,9 @@ class SnapshotsController < ApplicationController
       params[:snapshot][:photo] = uploaded_file
     end
 
+    puts "JHRLOG: after the base64 file processing"
 
+    @snapshot = Snapshot.new(snapshot_params)
     @snapshot.save
     respond_with(@snapshot)
   end
