@@ -41,8 +41,11 @@ class SnapshotsController < ApplicationController
       tempfile = Tempfile.new("snapshot.jpg", Rails.root.join('tmp','snapshot-temp'))
       tempfile.binmode
 
+      base64file = snapshot_path_params["file"].partition(',').last
+
+
       #get the file and decode it with base64 then write it to the tempfile
-      tempfile.write(Base64.decode64(snapshot_path_params["file"]))
+      tempfile.write(Base64.decode64(base64file))
 
       #create a new uploaded file
       uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => snapshot_path_params["snapshot.jpg"], :original_filename => snapshot_path_params["snapshot.jpg"])
