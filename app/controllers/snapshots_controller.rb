@@ -70,9 +70,14 @@ class SnapshotsController < ApplicationController
       # params[:snapshot][:photo] = uploaded_file
 
       @snapshot.photo = uploaded_file
+
       # puts "JHRLOG: snapshot has been assigned an upload image"
-      @snapshot.save
-      # puts "JHRLOG: snapshot has been saved with the image"
+      if @snapshot.save
+        # puts "JHRLOG: snapshot has been saved with the image"
+        tempfile.delete
+      end
+
+
     end
 
     # puts "JHRLOG: after the base64 file processing"
