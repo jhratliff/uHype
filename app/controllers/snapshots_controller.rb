@@ -25,26 +25,27 @@ class SnapshotsController < ApplicationController
     #snapshot {:user_id => "1", :like_count => 1, :unlike_count => 1, :flag_count => 1, etc., :snapshot_path {:file => "base64 encoded awesomeness", :original_filename => "my file name", :filename => "my file name"}}
 
     puts "JHRLOG: inside shapshot create"
+    puts "JHRLOG: dumping params..."
     puts params.inspect
+    puts "JHRLOG: end dumping params..."
 
     #check if file is within picture_path
     if params[:snapshot][:snapshot_path]["file"]
       puts "JHRLOG: found a file entry"
-      puts "JHRLOG: dumping params..."
-      puts "JHRLOG: end dumping params..."
 
 
       snapshot_path_params = params[:snapshot][:snapshot_path]
 
       #create a new tempfile named fileupload
-      tempfile = Tempfile.new("fileupload")
+
+      tempfile = Tempfile.new("snapshot.jpg", Rails.root.join('tmp','snapshot-temp'))
       tempfile.binmode
 
       #get the file and decode it with base64 then write it to the tempfile
       tempfile.write(Base64.decode64(snapshot_path_params["file"]))
 
       #create a new uploaded file
-      uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => snapshot_path_params["filename"], :original_filename => snapshot_path_params["original_filename"])
+      uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => snapshot_path_params["snapshot.jpg"], :original_filename => snapshot_path_params["snapshot.jpg"])
 
       #replace photo element with the new uploaded file
       params[:snapshot][:photo] = uploaded_file
