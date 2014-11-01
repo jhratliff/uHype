@@ -12,6 +12,10 @@ json.comments @school.comments do |comment |
   json.unlike_count comment.unlike_count
   json.created_at comment.created_at
 
+  json.liked = comment.comment_likes.include?(current_user)
+  json.unliked = comment.comment_unlikes.include?(current_user)
+  json.flagged = comment.comment_flags.include?(current_user)
+
   user = User.find(comment.user)
 
   json.user_id  user.id
