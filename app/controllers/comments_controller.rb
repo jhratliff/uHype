@@ -42,6 +42,7 @@ class CommentsController < ApplicationController
     if params[:comment_id]
       @user.flagged_comments << Comment.find(params[:comment_id])
     end
+    @comment = Comment.find(params[:comment_id])
   end
 
   def unflag
@@ -49,6 +50,7 @@ class CommentsController < ApplicationController
     if params[:comment_id]
       @user.flagged_comments.destroy(Comment.find(params[:comment_id]))
     end
+    @comment = Comment.find(params[:comment_id])
   end
 
 
@@ -57,6 +59,7 @@ class CommentsController < ApplicationController
     if params[:comment_id]
       @user.liked_comments << Comment.find(params[:comment_id])
     end
+    @comment = Comment.find(params[:comment_id])
   end
 
   def unlike
@@ -64,6 +67,7 @@ class CommentsController < ApplicationController
     if params[:comment_id]
       @user.liked_comments.destroy(Comment.find(params[:comment_id]))
     end
+    @comment = Comment.find(params[:comment_id])
   end
 
   def dislike
@@ -71,6 +75,7 @@ class CommentsController < ApplicationController
     if params[:comment_id]
       @user.unliked_comments << Comment.find(params[:comment_id])
     end
+    @comment = Comment.find(params[:comment_id])
   end
 
   def undislike
@@ -78,6 +83,7 @@ class CommentsController < ApplicationController
     if params[:comment_id]
       @user.unliked_comments.destroy(Comment.find(params[:comment_id]))
     end
+    @comment = Comment.find(params[:comment_id])
   end
 
 
