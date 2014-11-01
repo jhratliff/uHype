@@ -3,7 +3,7 @@ json.logo_large @school.logo.large.url
 json.logo_medium @school.logo.medium.url
 json.logo_thumb @school.logo.thumb.url
 json.logo_small @school.logo.small.url
-json.comments @school.comments do |json, comment |
+json.comments @school.comments do |comment |
 
   json.(:id, :detail, :flag_count, :like_count, :unlike_count, :created_at)
   user = User.find(comment.user)
