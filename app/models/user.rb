@@ -10,8 +10,11 @@ class User < ActiveRecord::Base
   has_many :followed_schools, :through => :follow_schools, :source => :school
 
   has_many :comments
+  has_many :comment_flags
   has_many :flagged_comments, :through => :comment_flags, :source => :comment
+  has_many :comment_likes
   has_many :liked_comments, :through => :comment_likes, :source => :comment
+  has_many :comment_unlikes
   has_many :unliked_comments, :through => :comment_unlikes, :source => :comment
 
   has_many :snapshots
