@@ -8,8 +8,7 @@ class SchoolsController < ApplicationController
   end
 
   def show
-    @response = {:school => @school, :user => current_user}
-    respond_with(@response)
+    respond_with(@school)
   end
 
   def new
