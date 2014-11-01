@@ -17,7 +17,7 @@ json.comments @school.comments do |comment |
   json.user_id  user.id
   json.first_name user.first_name
   json.last_name user.last_name
-  json.username :username
+  json.username user.username
   school = School.find(user.school)
   json.user_hs_name school.name
   end
