@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
   def index
-    @comments = Comment.all
+    @comments = Comment.order(id: :desc).all
     respond_with(@comments)
   end
 
