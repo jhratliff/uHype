@@ -8,7 +8,7 @@ class SchoolsController < ApplicationController
   end
 
   def show
-    respond_with(@school)
+    respond_with(@school.includes(:comments))
   end
 
   def new
