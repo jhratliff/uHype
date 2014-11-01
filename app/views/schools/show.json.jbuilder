@@ -1,3 +1,5 @@
+@school = @response.school
+@user = @response.user
 json.extract! @school, :id, :name, :address, :city, :state, :zip, :maplink, :stype, :grades, :website, :created_at, :updated_at
 json.logo_large @school.logo.large.url
 json.logo_medium @school.logo.medium.url
@@ -12,9 +14,9 @@ json.comments @school.comments.order(id: :desc) do |comment |
   json.unlike_count comment.unlike_count
   json.created_at comment.created_at
 
-  json.liked = comment.comment_likes.include?(current_user)
-  json.unliked = comment.comment_unlikes.include?(current_user)
-  json.flagged = comment.comment_flags.include?(current_user)
+  json.liked = comment.comment_likes.include?(@user)
+  json.unliked = comment.comment_unlikes.include?(@user)
+  json.flagged = comment.comment_flags.include?(@user)
 
   user = User.find(comment.user)
 

@@ -3,7 +3,7 @@
     <span class="glyphicon glyphicon-list-alt"></span>
     Back
   <% end %>
-  <%= link_to edit_school_path(@school), :class => 'btn btn-primary' do %>
+  <%= link_to edit_school_path(@response.school), :class => 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-pencil"></span>
     Edit
   <% end %>
@@ -12,45 +12,45 @@
 
 <dl class="dl-horizontal">
   <dt>Name:</dt>
-  <dd><%= @school.name %></dd>
+  <dd><%= @response.school.name %></dd>
 
   <dt>Address:</dt>
-  <dd><%= @school.address %></dd>
+  <dd><%= @response.school.address %></dd>
 
   <dt>City:</dt>
-  <dd><%= @school.city %></dd>
+  <dd><%= @response.school.city %></dd>
 
   <dt>State:</dt>
-  <dd><%= @school.state %></dd>
+  <dd><%= @response.school.state %></dd>
 
   <dt>Zip:</dt>
-  <dd><%= @school.zip %></dd>
+  <dd><%= @response.school.zip %></dd>
 
   <dt>Maplink:</dt>
-  <dd><%= @school.maplink %></dd>
+  <dd><%= @response.school.maplink %></dd>
 
   <dt>Type:</dt>
-  <dd><%= @school.stype %></dd>
+  <dd><%= @response.school.stype %></dd>
 
   <dt>Grades:</dt>
-  <dd><%= @school.grades %></dd>
+  <dd><%= @response.school.grades %></dd>
 
   <dt>Website:</dt>
-  <dd><%= @school.website %></dd>
+  <dd><%= @response.school.website %></dd>
 
     <dt>Full-Size Logo:</dt>
-    <dd><%= image_tag(@school.logo.url) if @school.logo? %></dd>
+    <dd><%= image_tag(@response.school.logo.url) if @response.school.logo? %></dd>
 
     <dt>Large Logo:</dt>
-    <dd><%= image_tag(@school.logo.large.url) if @school.logo? %></dd>
+    <dd><%= image_tag(@response.school.logo.large.url) if @response.school.logo? %></dd>
 
     <dt>Medium Logo:</dt>
-    <dd><%= image_tag(@school.logo.medium.url) if @school.logo? %></dd>
+    <dd><%= image_tag(@response.school.logo.medium.url) if @response.school.logo? %></dd>
 
     <dt>Thumb Logo:</dt>
-    <dd><%= image_tag(@school.logo.thumb.url) if @school.logo? %></dd>
+    <dd><%= image_tag(@response.school.logo.thumb.url) if @response.school.logo? %></dd>
 
     <dt>Small Logo:</dt>
-    <dd><%= image_tag(@school.logo.small.url) if @school.logo? %></dd>
+    <dd><%= image_tag(@response.school.logo.small.url) if @response.school.logo? %></dd>
 
 </dl>

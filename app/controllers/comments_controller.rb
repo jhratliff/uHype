@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
 
   def index
     @comments = Comment.order(id: :desc).all
+    @my_flagged_comments = current_user.flagged_comments
     respond_with(@comments)
   end
 
