@@ -5,4 +5,6 @@ class School < ActiveRecord::Base
   has_many :follow_schools
   has_many :followers, :through => :follow_schools, :source => :user
 
+  has_many :comments
+
 end
