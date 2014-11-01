@@ -61,6 +61,8 @@ class CommentsController < ApplicationController
       @user.liked_comments << Comment.find(params[:comment_id])
     end
     @comment = Comment.find(params[:comment_id])
+    @comment.like_count = @comment.comment_likes.count
+    @comment.save
   end
 
   def unlike
@@ -69,6 +71,8 @@ class CommentsController < ApplicationController
       @user.liked_comments.destroy(Comment.find(params[:comment_id]))
     end
     @comment = Comment.find(params[:comment_id])
+    @comment.like_count = @comment.comment_likes.count
+    @comment.save
   end
 
   def dislike
@@ -77,6 +81,8 @@ class CommentsController < ApplicationController
       @user.unliked_comments << Comment.find(params[:comment_id])
     end
     @comment = Comment.find(params[:comment_id])
+    @comment.unlike_count = @comment.comment_unlikes.count
+    @comment.save
   end
 
   def undislike
@@ -85,6 +91,8 @@ class CommentsController < ApplicationController
       @user.unliked_comments.destroy(Comment.find(params[:comment_id]))
     end
     @comment = Comment.find(params[:comment_id])
+    @comment.unlike_count = @comment.comment_unlikes.count
+    @comment.save
   end
 
 
