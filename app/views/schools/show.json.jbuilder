@@ -5,7 +5,13 @@ json.logo_thumb @school.logo.thumb.url
 json.logo_small @school.logo.small.url
 json.comments @school.comments do |comment |
 
-  json.(:id, :detail, :flag_count, :like_count, :unlike_count, :created_at)
+  json.id comment.id
+  json.detail comment.detail
+  json.flag_count comment.flag_count
+  json.like_count comment.like_count
+  json.unlike_count comment.unlike_count
+  json.created_at comment.created_at
+
   user = User.find(comment.user)
 
   json.user_id  user.id
