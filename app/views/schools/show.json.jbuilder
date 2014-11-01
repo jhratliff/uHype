@@ -13,9 +13,9 @@ json.comments @school.comments.order(id: :desc) do |comment |
   json.unlike_count comment.unlike_count
   json.created_at comment.created_at
 
-  json.liked = comment.comment_likers.include?(@user).to_s
-  json.unliked = comment.comment_unlikers.include?(@user).to_s
-  json.flagged = comment.comment_flaggers.include?(@user).to_s
+  json.liked comment.comment_likers.include?(@user)
+  json.unliked comment.comment_unlikers.include?(@user)
+  json.flagged comment.comment_flaggers.include?(@user)
 
   user = User.find(comment.user)
 
