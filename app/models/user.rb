@@ -8,7 +8,12 @@ class User < ActiveRecord::Base
   belongs_to :school
   has_many :follow_schools
   has_many :followed_schools, :through => :follow_schools, :source => :school
+
   has_many :comments
+  has_many :flagged_comments, :through => :comment_flags, :source => :comment
+  has_many :liked_comments, :through => :comment_likes, :source => :comment
+  has_many :unliked_comments, :through => :comment_unlikes, :source => :comment
+
   has_many :snapshots
   has_many :sent_messages, :foreign_key => 'user_id', :class_name => 'Message'
   has_many :received_messages, :through => :sent_messages, :source => 'messaged'

@@ -35,6 +35,53 @@ class CommentsController < ApplicationController
     respond_with(@comment)
   end
 
+
+
+  def flag
+    @user = current_user
+    if params[:comment_id]
+      @user.flagged_comments << Comment.find(params[:comment_id])
+    end
+  end
+
+  def unflag
+    @user = current_user
+    if params[:comment_id]
+      @user.flagged_comments.destroy(Comment.find(params[:comment_id]))
+    end
+  end
+
+
+  def like
+    @user = current_user
+    if params[:comment_id]
+      @user.liked_comments << Comment.find(params[:comment_id])
+    end
+  end
+
+  def unlike
+    @user = current_user
+    if params[:comment_id]
+      @user.liked_comments.destroy(Comment.find(params[:comment_id]))
+    end
+  end
+
+  def dislike
+    @user = current_user
+    if params[:comment_id]
+      @user.unliked_comments << Comment.find(params[:comment_id])
+    end
+  end
+
+  def undislike
+    @user = current_user
+    if params[:comment_id]
+      @user.unliked_comments.destroy(Comment.find(params[:comment_id]))
+    end
+  end
+
+
+
   private
     def set_comment
       @comment = Comment.find(params[:id])
