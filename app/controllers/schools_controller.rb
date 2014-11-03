@@ -46,6 +46,11 @@ class SchoolsController < ApplicationController
     end
   end
 
+  def members
+    @school = School.find(params[:school_id])
+    respond_with(@school)
+  end
+
   def destroy
     @school.destroy
     respond_with(@school)

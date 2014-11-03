@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get "/users/me" => "users#me"
 
+  post "/schools/:school_id/members" => "schools#members"
+
   post "/schools/:school_id/follow" => "schools#follow"
   post "/schools/:school_id/unfollow" => "schools#unfollow"
 
