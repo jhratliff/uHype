@@ -14,4 +14,9 @@ json.users @school.users.order(id: :desc) do |user |
   json.followers_count user.followers.count
 
   json.following user.followers.include?(@user)
+
+  json.avatar_large user.avatar.large.url
+  json.avatar_medium user.avatar.medium.url
+  json.avatar_thumb user.avatar.thumb.url
+  json.avatar_small user.avatar.small.url
 end
