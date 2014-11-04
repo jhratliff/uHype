@@ -63,8 +63,9 @@ class MessagesController < ApplicationController
 
 
   # returns the chat conversation between the recipient and me in ascending order
+  # input expects a recipient_id value in the params array
   def chat
-    partner = User.find(params[:recipient_id]);
+    partner = User.find(params[:recipient_id])
 
     # sort descending
     # (Message.where(:user => u, :recipient =>p) + Message.where(:user => p, :recipient => u)).sort_by{|e| -e[:id]}
