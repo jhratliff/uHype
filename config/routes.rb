@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  resources :snapshots
-
-  resources :comments
-
-  resources :schools
 
   mount Upmin::Engine => '/admin'
 
@@ -28,9 +23,16 @@ Rails.application.routes.draw do
   post "/comments/:comment_id/dislike" => "comments#dislike"
   post "/comments/:comment_id/undislike" => "comments#undislike"
 
+  get "/messages/:recipient_id/chat" => "messages#chat"
+
+
   devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}
 
   resources :users
+  resources :snapshots
+  resources :comments
+  resources :schools
+  resources :messages
 
 
 

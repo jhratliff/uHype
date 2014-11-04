@@ -18,8 +18,16 @@ class User < ActiveRecord::Base
   has_many :unliked_comments, :through => :comment_unlikes, :source => :comment
 
   has_many :snapshots
+
+  has_many :messages
+
+  # this would be all the messages I've sent
   has_many :sent_messages, :foreign_key => 'user_id', :class_name => 'Message'
-  has_many :received_messages, :through => :sent_messages, :source => 'messaged'
+
+  # this corresponds roughly to "people I've messaged" - not terribly useful at the moment
+  # has_many :received_messages, :through => :sent_messages, :source => 'recipient'
+
+  has_many :received_messages, :foreign_key => 'recipient_id', :class_name => 'Message'
 
   # set up the friends relationships (people I follow)
   has_many :followings                                              # the following records I created
