@@ -41,6 +41,26 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
+
+  def follow
+    @user = current_user
+    if params[:user_id]
+      @user.friends << User.find(params[:user_id])
+    end
+  end
+
+  def unfollow
+    @user = current_user
+    if params[:user_id]
+      @user.friends.destroy(User.find(params[:user_id]))
+    end
+  end
+
+
+
+
+
+
   def feed
     # returns the user's feed
     # feed items are the most recent items from all the schools I follow (including my own school)

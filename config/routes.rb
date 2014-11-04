@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   root to: 'visitors#index'
 
   get "/users/me" => "users#me"
+  post "/users/:school_id/follow" => "users#follow"
+  post "/users/:school_id/unfollow" => "users#unfollow"
 
   get "/schools/:school_id/members" => "schools#members"
 
