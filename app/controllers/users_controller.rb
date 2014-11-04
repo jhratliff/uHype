@@ -56,6 +56,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def friends
+    @user = current_user
+    respond_with(@user)
+  end
+
 
 
 
