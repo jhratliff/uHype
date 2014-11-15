@@ -15,6 +15,7 @@ json.friends @user.friends.order(id: :desc) do | friend |
   json.created_at friend.created_at
   json.followers friend.followers.count
   json.school_id friend.school_id
+  json.is_private friend.is_private
   school = School.find(friend.school)
   json.user_hs_name school.name
 end
