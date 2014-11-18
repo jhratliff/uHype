@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get "/users/friends" => "users#friends"
   post "/users/:user_id/follow" => "users#follow"
   post "/users/:user_id/unfollow" => "users#unfollow"
+  post "/followings/approve/:user_id" => "followings#approve"
+  post "/followings/decline/:user_id" => "followings#decline"
 
   get "/schools/:school_id/members" => "schools#members"
 
@@ -33,7 +35,7 @@ Rails.application.routes.draw do
   resources :comments
   resources :schools
   resources :messages
-
+  resources :followings
 
 
 end
