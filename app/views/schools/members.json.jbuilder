@@ -21,5 +21,8 @@ json.users @school.users.order(id: :desc) do |user |
   json.avatar_small user.avatar.small.url
 
   followed = user.followeds.where(:user => @user).last
-  json.following_status followed.status
+
+  following_status = followed.status unless followed.nil?
+
+  json.following_status following_status
 end
