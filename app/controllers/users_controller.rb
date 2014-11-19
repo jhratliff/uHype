@@ -47,13 +47,13 @@ class UsersController < ApplicationController
 
     if params[:user_id]
 
-      @requestor = User.find(params[:user_id])
+      @followed = User.find(params[:user_id])
       # @following = @user.followeds.where(:user => @requestor)
       @following = Following.new
-      @following.user = @requestor
-      @following.followed = @user
+      @following.user = @user
+      @following.followed = @followed
 
-      if current_user.is_private
+      if @followed.is_private
         puts "current_user is private"
         @following.status = "requested"
       else
