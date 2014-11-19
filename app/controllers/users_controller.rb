@@ -44,15 +44,24 @@ class UsersController < ApplicationController
 
   def follow
     @user = current_user
+
     if params[:user_id]
+
+      @requestor = User.find(params[:user_id])
+      # @following = @user.followeds.where(:user => @requestor)
+      @following = Following.new
+      @following.user = @requestor
+      @following.followed = @user
+
       if current_user.is_private
-        @requestor = User.find(params[:user_id])
-        @following = @user.followeds.where(:user => @requestor)
         @following.status = "requested"
-        @following.save
       else
-        @user.friends << User.find(params[:user_id])
+        # @user.friends << User.find(params[:user_id])
+        @follow_status = "approved"
       end
+
+      @following.save
+
     end
 
   end
