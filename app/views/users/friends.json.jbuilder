@@ -18,6 +18,6 @@ json.friends @user.friends.order(id: :desc) do | friend |
   json.is_private friend.is_private
   school = School.find(friend.school)
   json.user_hs_name school.name
-  followed = friend.followeds.where(:user => @user)
+  followed = friend.followeds.where(:user => @user).last
   json.following_status followed.status
 end
