@@ -19,4 +19,7 @@ json.users @school.users.order(id: :desc) do |user |
   json.avatar_medium user.avatar.medium.url
   json.avatar_thumb user.avatar.thumb.url
   json.avatar_small user.avatar.small.url
+
+  followed = user.followeds.where(:user => @user).last
+  json.following_status followed.status
 end
