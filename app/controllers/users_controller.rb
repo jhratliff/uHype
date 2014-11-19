@@ -54,10 +54,12 @@ class UsersController < ApplicationController
       @following.followed = @user
 
       if current_user.is_private
+        puts "current_user is private"
         @following.status = "requested"
       else
         # @user.friends << User.find(params[:user_id])
-        @follow_status = "approved"
+        puts "current_user is public"
+        @following.status = "approved"
       end
 
       @following.save
