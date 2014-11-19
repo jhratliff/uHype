@@ -3,3 +3,4 @@ json.extract! @user, :id, :authentication_token, :email, :first_name, :last_name
 school = School.find(@user.school)
 
 json.high_school_name school.name
+json.following_status @following.status
