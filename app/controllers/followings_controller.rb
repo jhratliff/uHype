@@ -66,7 +66,7 @@ class FollowingsController < ApplicationController
   def approve
     @user = current_user
     @requestor = User.find(params[:user_id])
-    @following = @user.followeds.where(:followed => @requestor)
+    @following = @user.followeds.where(:followed => @user)
     @following.status = "approved"
     @following.save
     respond_with(@following)
@@ -76,7 +76,7 @@ class FollowingsController < ApplicationController
   def decline
     @user = current_user
     @requestor = User.find(params[:user_id])
-    @following = @user.followeds.where(:followed => @requestor)
+    @following = @user.followeds.where(:followed => @user)
     @following.status = "declined"
     @following.save
     respond_with(@following)
