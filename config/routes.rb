@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get "/users/me" => "users#me"
   get "/users/friends" => "users#friends"
+  get "/users/followers" => "users#followers"
   post "/users/:user_id/follow" => "users#follow"
   post "/users/:user_id/unfollow" => "users#unfollow"
   post "/followings/approve/:user_id" => "followings#approve"

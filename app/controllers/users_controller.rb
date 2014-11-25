@@ -80,6 +80,11 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
+  def followers
+    @user = current_user
+    respond_with(@user)
+  end
+
 
   def feed
     # returns the user's feed
