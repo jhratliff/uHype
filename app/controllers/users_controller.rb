@@ -18,6 +18,50 @@ class UsersController < ApplicationController
     authorize @user
     if @user.update_attributes(secure_params)
       # redirect_to users_path, :notice => "User updated."
+
+      #check if file is within picture_path
+      if params[:avatar][:avatar_path]["avatar_file"]
+        puts "JHRLOG: found a file entry"
+
+
+        avatar_path_params = params[:avatar][:avatar_path]
+
+        #create a new tempfile named fileupload
+
+        tempfile = Tempfile.new("avatar.jpg", Rails.root.join('tmp'))
+
+        puts"JHRLOG: tempfile opened at #{tempfile.path}"
+
+        tempfile.binmode
+        puts"JHRLOG: tempfile binmode set"
+
+        # the buffer may be coming in with a base64 descriptor... trim it off the front
+        # base64file = snapshot_path_params["snapshot_file"].partition(',').last
+        base64file = avatar_path_params["avatar_file"]
+
+
+        #get the file and decode it with base64 then write it to the tempfile
+        tempfile.write(Base64.decode64(base64file))
+
+        puts "JHRLOG: tempfile size after decode64 is #{tempfile.size}"
+
+        #create a new uploaded file
+        uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => "avatar.jpg", :original_filename => "avatar.jpg")
+
+        puts "JHRLOG: uploaded file object has been created "
+
+        #replace photo element with the new uploaded file
+        # params[:snapshot][:photo] = uploaded_file
+
+        @user.avatar = uploaded_file
+
+        puts "JHRLOG: avatar has been assigned an upload image"
+        if @user.save
+          puts "JHRLOG: avatar has been saved with the image"
+          tempfile.unlink
+        end
+      end
+
       respond_with(@user);
     else
       respond_with(@user.errors, :status => :unprocessable_entity) do |format|
@@ -105,7 +149,7 @@ class UsersController < ApplicationController
   private
 
   def secure_params
-    params.require(:user).permit(:role, :first_name, :last_name, :dob, :class_of, :school_id, :is_private)
+    params.require(:user).permit(:role, :first_name, :last_name, :dob, :class_of, :school_id, :is_private, :avatar, :avatar_cache)
   end
 
 end
