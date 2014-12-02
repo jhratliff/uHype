@@ -32,6 +32,7 @@ class SnapshotsController < ApplicationController
 
 
     @snapshot = Snapshot.new(snapshot_params)
+    @snapshot.user = current_user
     @snapshot.save
 
     # puts "JHRLOG: new snapshot is created, lacking the image"
