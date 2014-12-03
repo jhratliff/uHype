@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 
         puts "JHRLOG: tempfile size after decode64 is #{tempfile.size}"
 
-        random_filename = (Time.now.to_f * 1000).to_i + ".jpg"
+        random_filename = (Time.now.to_f * 1000).to_s + ".jpg"
 
         #create a new uploaded file
         uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => random_filename, :original_filename => random_filename)
