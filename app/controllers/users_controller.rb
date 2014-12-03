@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       # redirect_to users_path, :notice => "User updated."
 
       #check if file is within picture_path
-      if params[:avatar][:avatar_path]["avatar_file"]
+      if params[:avatar]
         # puts "JHRLOG: found a file entry"
 
 
