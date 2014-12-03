@@ -131,6 +131,21 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
+  # GET /users/:user_id/media
+  def media
+
+    if(params[:user_id])
+      user = User.find(params[:user_id])
+    else
+      user = current_user
+    end
+
+    @snapshots = user.snapshots
+
+    respond_with(@snapshots)
+
+  end
+
 
   def feed
     # returns the user's feed
