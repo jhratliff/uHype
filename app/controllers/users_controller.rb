@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
       #check if file is within picture_path
       if params[:avatar][:avatar_path]["avatar_file"]
-        puts "JHRLOG: found a file entry"
+        # puts "JHRLOG: found a file entry"
 
 
         avatar_path_params = params[:avatar][:avatar_path]
@@ -30,10 +30,10 @@ class UsersController < ApplicationController
 
         tempfile = Tempfile.new("avatar.jpg", Rails.root.join('tmp'))
 
-        puts"JHRLOG: tempfile opened at #{tempfile.path}"
+        # puts"JHRLOG: tempfile opened at #{tempfile.path}"
 
         tempfile.binmode
-        puts"JHRLOG: tempfile binmode set"
+        # puts"JHRLOG: tempfile binmode set"
 
         # the buffer may be coming in with a base64 descriptor... trim it off the front
         # base64file = snapshot_path_params["snapshot_file"].partition(',').last
@@ -43,23 +43,23 @@ class UsersController < ApplicationController
         #get the file and decode it with base64 then write it to the tempfile
         tempfile.write(Base64.decode64(base64file))
 
-        puts "JHRLOG: tempfile size after decode64 is #{tempfile.size}"
+        # puts "JHRLOG: tempfile size after decode64 is #{tempfile.size}"
 
         random_filename = (Time.now.to_f * 1000).to_s + ".jpg"
 
         #create a new uploaded file
         uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => random_filename, :original_filename => random_filename)
 
-        puts "JHRLOG: uploaded file object has been created "
+        # puts "JHRLOG: uploaded file object has been created "
 
         #replace photo element with the new uploaded file
         # params[:snapshot][:photo] = uploaded_file
 
         @user.avatar = uploaded_file
 
-        puts "JHRLOG: avatar has been assigned an upload image"
+        # puts "JHRLOG: avatar has been assigned an upload image"
         if @user.save
-          puts "JHRLOG: avatar has been saved with the image"
+          # puts "JHRLOG: avatar has been saved with the image"
           tempfile.unlink
         end
       end
