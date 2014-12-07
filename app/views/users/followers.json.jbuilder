@@ -16,6 +16,9 @@ json.followers @user.followers.order(id: :desc) do | follower |
   json.followers follower.followers.count
   json.school_id follower.school_id
   json.is_private follower.is_private
+  json.is_location_private follower.is_location_private
+  json.latitude follower.latitude
+  json.longitude follower.longitude
   school = School.find(follower.school)
   json.user_hs_name school.name
 

@@ -16,6 +16,9 @@ json.friends @user.friends.order(id: :desc) do | friend |
   json.followers friend.followers.count
   json.school_id friend.school_id
   json.is_private friend.is_private
+  json.is_location_private friend.is_location_private
+  json.latitude friend.latitude
+  json.longitude friend.longitude
   school = School.find(friend.school)
   json.user_hs_name school.name
   followed = friend.followeds.where(:user => @user).last
