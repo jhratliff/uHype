@@ -160,6 +160,11 @@ class UsersController < ApplicationController
     #
     # the same data for all the individuals I follow (their posts)
 
+    schools = current_user.followed_schools
+
+    @comments = Comment.where(:school => schools).order(:id).last(100)
+    respond_with(@comments)
+
 
   end
 
