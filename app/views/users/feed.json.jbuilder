@@ -9,6 +9,7 @@ json.array!(@comments) do |comment|
   school = School.find(comment.school)
 
   json.school_name school.name
+  json.school_logo school.logo.medium.url unless school.logo.nil?
 
   json.url comment_url(comment, format: :json)
 end
