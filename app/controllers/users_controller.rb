@@ -84,6 +84,9 @@ class UsersController < ApplicationController
   def me
     @user = current_user
     # render :json => current_user
+
+    puts ">>>>>> ME requested, returning First Name: #{@user.first_name}, Last Name: #{@user.last_name}, Email: #{@user.email}"
+
     respond_with(@user)
   end
 
