@@ -27,4 +27,10 @@ json.followers @user.followers.order(id: :desc) do | follower |
   # if I'm following this user, get the status (requested, approved, denied)
   following_status = following.status unless following.nil?
   json.following_status following_status
+
+  json.avatar_large follower.avatar.large.url
+  json.avatar_medium follower.avatar.medium.url
+  json.avatar_thumb follower.avatar.thumb.url
+  json.avatar_small follower.avatar.small.url
+
 end
