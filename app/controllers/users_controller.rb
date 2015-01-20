@@ -165,7 +165,7 @@ class UsersController < ApplicationController
 
     schools = current_user.followed_schools
 
-    @comments = Comment.where(:school => schools).order(:id => desc).last(100)
+    @comments = Comment.where(:school => schools).order(:id => :desc).last(100)
     @user = current_user
     respond_with(@comments)
 
