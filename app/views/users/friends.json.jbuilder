@@ -25,4 +25,10 @@ json.friends @user.friends.order(id: :desc) do | friend |
 
   following_status = followed.status unless followed.nil?
   json.following_status following_status
+
+  json.avatar_large friend.avatar.large.url
+  json.avatar_medium friend.avatar.medium.url
+  json.avatar_thumb friend.avatar.thumb.url
+  json.avatar_small friend.avatar.small.url
+
 end
