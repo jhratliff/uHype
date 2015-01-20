@@ -5,4 +5,5 @@ json.array!(@schools) do |school|
   json.logo_medium school.logo.medium.url
   json.logo_thumb school.logo.thumb.url
   json.logo_small school.logo.small.url
+  json.member_count school.users.count
 end
