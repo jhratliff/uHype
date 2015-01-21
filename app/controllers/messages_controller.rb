@@ -32,11 +32,11 @@ class MessagesController < ApplicationController
     # puts "JHRLOG: new snapshot is created, lacking the image"
 
     #check if file is within picture_path
-    if params[:media][:media_path]["media_file"]
+    if params[:message][:media_path]["media_file"]
       # puts "JHRLOG: found a file entry"
 
 
-      media_path_params = params[:media][:media_path]
+      media_path_params = params[:message][:media_path]
 
       #create a new tempfile named fileupload
 
