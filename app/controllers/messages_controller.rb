@@ -29,12 +29,12 @@ class MessagesController < ApplicationController
 
     @message.save
 
-    # puts "JHRLOG: new snapshot is created, lacking the image"
+    puts "JHRLOG: new snapshot is created, lacking the image"
 
     #check if file is within picture_path
-    # if(params.has_key?(:message) && params.has_key?(:media_path) && params.has_key?("media_file"))
-    if params[:message][:media_path]["media_file"]
-      # puts "JHRLOG: found a file entry"
+    if(params.has_key?(:message) && params.has_key?(:media_path) && params.has_key?("media_file"))
+    # if params[:message][:media_path]["media_file"]
+      puts "JHRLOG: found a file entry"
 
 
       media_path_params = params[:message][:media_path]
@@ -43,10 +43,10 @@ class MessagesController < ApplicationController
 
       tempfile = Tempfile.new("media.jpg", Rails.root.join('tmp'))
 
-      # puts"JHRLOG: tempfile opened at #{tempfile.path}"
+      puts"JHRLOG: tempfile opened at #{tempfile.path}"
 
       tempfile.binmode
-      # puts"JHRLOG: tempfile binmode set"
+      puts"JHRLOG: tempfile binmode set"
 
       # the buffer may be coming in with a base64 descriptor... trim it off the front
       # base64file = snapshot_path_params["snapshot_file"].partition(',').last
@@ -56,12 +56,12 @@ class MessagesController < ApplicationController
       #get the file and decode it with base64 then write it to the tempfile
       tempfile.write(Base64.decode64(base64file))
 
-      # puts "JHRLOG: tempfile size after decode64 is #{tempfile.size}"
+      puts "JHRLOG: tempfile size after decode64 is #{tempfile.size}"
 
       #create a new uploaded file
       uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => "media.jpg", :original_filename => "media.jpg")
 
-      # puts "JHRLOG: uploaded file object has been created "
+      puts "JHRLOG: uploaded file object has been created "
 
       #replace photo element with the new uploaded file
       # params[:snapshot][:photo] = uploaded_file
@@ -77,7 +77,7 @@ class MessagesController < ApplicationController
 
     end
 
-    # puts "JHRLOG: after the base64 file processing"
+    puts "JHRLOG: after the base64 file processing"
 
     respond_with(@message)
   end
