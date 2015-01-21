@@ -32,8 +32,23 @@ class MessagesController < ApplicationController
     puts "JHRLOG: new snapshot is created, lacking the image"
 
     #check if file is within picture_path
-    if(params.has_key?(:message) && params.has_key?(:media_path) && params.has_key?("media_file"))
-    # if params[:message][:media_path]["media_file"]
+    # if(params.has_key?(:message) && params.has_key?(:media_path) && params.has_key?("media_file"))
+
+    if params[:message]
+      puts "JHRLOG: >>>>>> MESSAGE"
+    end
+
+    if params[:message][:media_path]
+      puts "JHRLOG: >>>>>> MESSAGE and MEDIA PATH"
+    end
+
+    if params[:message][:media_path]["media_file"]
+      puts "JHRLOG: >>>>>> MESSAGE and MEDIA PATH and MEDIA FILE"
+    end
+
+
+
+    if params[:message][:media_path]["media_file"]
       puts "JHRLOG: found a file entry"
 
 
