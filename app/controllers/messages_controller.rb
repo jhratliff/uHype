@@ -32,15 +32,15 @@ class MessagesController < ApplicationController
     # puts "JHRLOG: new snapshot is created, lacking the image"
 
     #check if file is within picture_path
-    if params[:message][:message_path]["message_file"]
+    if params[:media][:media_path]["media_file"]
       # puts "JHRLOG: found a file entry"
 
 
-      message_path_params = params[:message][:message_path]
+      media_path_params = params[:media][:media_path]
 
       #create a new tempfile named fileupload
 
-      tempfile = Tempfile.new("message.jpg", Rails.root.join('tmp'))
+      tempfile = Tempfile.new("media.jpg", Rails.root.join('tmp'))
 
       # puts"JHRLOG: tempfile opened at #{tempfile.path}"
 
@@ -49,7 +49,7 @@ class MessagesController < ApplicationController
 
       # the buffer may be coming in with a base64 descriptor... trim it off the front
       # base64file = snapshot_path_params["snapshot_file"].partition(',').last
-      base64file = message_path_params["message_file"]
+      base64file = media_path_params["media_file"]
 
 
       #get the file and decode it with base64 then write it to the tempfile
@@ -58,7 +58,7 @@ class MessagesController < ApplicationController
       # puts "JHRLOG: tempfile size after decode64 is #{tempfile.size}"
 
       #create a new uploaded file
-      uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => "message.jpg", :original_filename => "message.jpg")
+      uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => "media.jpg", :original_filename => "media.jpg")
 
       # puts "JHRLOG: uploaded file object has been created "
 
