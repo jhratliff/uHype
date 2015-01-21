@@ -4,6 +4,7 @@ json.avatar_large @user.avatar.large.url unless @user.avatar.nil?
 json.avatar_medium @user.avatar.medium.url unless @user.avatar.nil?
 json.avatar_thumb @user.avatar.thumb.url unless @user.avatar.nil?
 json.avatar_small @user.avatar.small.url unless @user.avatar.nil?
+json.follower_count @user.followers.count
 
 school = School.find(@user.school)
 
