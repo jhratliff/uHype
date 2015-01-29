@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "/users/followers" => "users#followers"
   get "/users/media" => "users#media"
   get "/users/:user_id/media" => "users#media"
-  get "/friend/:friend_id" => "user#friend"
+  get "/friend/:friend_id" => "users#friend"
   post "/users/:user_id/follow" => "users#follow"
   post "/users/:user_id/unfollow" => "users#unfollow"
   post "/followings/approve/:user_id" => "followings#approve"
