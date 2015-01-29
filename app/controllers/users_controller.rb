@@ -138,12 +138,22 @@ class UsersController < ApplicationController
   end
 
   def friends
-    @user = current_user
+    if(params[:user_id])
+      @user = User.find(params[:user_id])
+    else
+      @user = current_user
+    end
+
     respond_with(@user)
   end
 
   def followers
-    @user = current_user
+    if(params[:user_id])
+      @user = User.find(params[:user_id])
+    else
+      @user = current_user
+    end
+
     respond_with(@user)
   end
 

@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   get "/users/me" => "users#me"
   get "/users/feed" => "users#feed"
+  get "/users/:user_id/friends" => "users#friends"
   get "/users/friends" => "users#friends"
+  get "/users/:user_id/followers" => "users#followers"
   get "/users/followers" => "users#followers"
   get "/users/media" => "users#media"
   get "/users/:user_id/media" => "users#media"
