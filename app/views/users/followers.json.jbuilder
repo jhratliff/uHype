@@ -1,11 +1,11 @@
-json.extract! @response.user, :id, :first_name, :last_name, :class_of, :username, :created_at
+json.extract! @response[user], :id, :first_name, :last_name, :class_of, :username, :created_at
 
-json.avatar_large @response.user.avatar.large.url
-json.avatar_medium @response.user.avatar.medium.url
-json.avatar_thumb @response.user.avatar.thumb.url
-json.avatar_small @response.user.avatar.small.url
+json.avatar_large @response[user].avatar.large.url
+json.avatar_medium @response[user].avatar.medium.url
+json.avatar_thumb @response[user].avatar.thumb.url
+json.avatar_small @response[user].avatar.small.url
 
-json.followers @response.user.followers.order(id: :desc) do | follower |
+json.followers @response[user].followers.order(id: :desc) do | follower |
 
   json.id follower.id
   json.first_name follower.first_name
@@ -22,7 +22,7 @@ json.followers @response.user.followers.order(id: :desc) do | follower |
   school = School.find(follower.school)
   json.user_hs_name school.name
 
-  following = follower.followings.where(:followed => @response.current_user).last
+  following = follower.followings.where(:followed => @response[current_user]).last
 
   # if I'm following this user, get the status (requested, approved, denied)
   following_status = following.status unless following.nil?
