@@ -90,6 +90,19 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
+  def friend
+    # return our own record if we don't find the friend
+    @user = current_user
+
+    if params[:friend_id]
+      @user = User.find(params[:friend_id])
+    end
+
+    puts ">>>>>> FRIEND requested, returning First Name: #{@user.first_name}, Last Name: #{@user.last_name}, Email: #{@user.email}"
+
+    respond_with(@user)
+  end
+
 
   def follow
     @user = current_user
