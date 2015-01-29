@@ -138,23 +138,27 @@ class UsersController < ApplicationController
   end
 
   def friends
+    @current_user = current_user
     if(params[:user_id])
       @user = User.find(params[:user_id])
     else
       @user = current_user
     end
+    @response = {:user => @user, :current_user => @current_user}
 
-    respond_with(@user)
+    respond_with(@response)
   end
 
   def followers
+    @current_user = current_user
     if(params[:user_id])
       @user = User.find(params[:user_id])
     else
       @user = current_user
     end
 
-    respond_with(@user)
+    @response = {:user => @user, :current_user => @current_user}
+    respond_with(@response)
   end
 
   # GET /users/:user_id/media

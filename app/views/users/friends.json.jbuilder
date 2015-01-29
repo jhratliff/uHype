@@ -1,11 +1,11 @@
-json.extract! @user, :id, :first_name, :last_name, :class_of, :username, :created_at
+json.extract! @response.user, :id, :first_name, :last_name, :class_of, :username, :created_at
 
-json.avatar_large @user.avatar.large.url
-json.avatar_medium @user.avatar.medium.url
-json.avatar_thumb @user.avatar.thumb.url
-json.avatar_small @user.avatar.small.url
+json.avatar_large @response.user.avatar.large.url
+json.avatar_medium @response.user.avatar.medium.url
+json.avatar_thumb @response.user.avatar.thumb.url
+json.avatar_small @response.user.avatar.small.url
 
-json.friends @user.friends.order(id: :desc) do | friend |
+json.friends @response.user.friends.order(id: :desc) do | friend |
 
   json.id friend.id
   json.first_name friend.first_name
@@ -21,7 +21,7 @@ json.friends @user.friends.order(id: :desc) do | friend |
   json.longitude friend.longitude
   school = School.find(friend.school)
   json.user_hs_name school.name
-  followed = friend.followeds.where(:user => current_user).last
+  followed = friend.followeds.where(:user => @response.current_user).last
 
   following_status = followed.status unless followed.nil?
   json.following_status following_status
