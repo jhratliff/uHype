@@ -21,7 +21,7 @@ json.friends @user.friends.order(id: :desc) do | friend |
   json.longitude friend.longitude
   school = School.find(friend.school)
   json.user_hs_name school.name
-  followed = friend.followeds.where(:user => @user).last
+  followed = friend.followeds.where(:user => current_user).last
 
   following_status = followed.status unless followed.nil?
   json.following_status following_status

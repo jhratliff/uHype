@@ -22,7 +22,7 @@ json.followers @user.followers.order(id: :desc) do | follower |
   school = School.find(follower.school)
   json.user_hs_name school.name
 
-  following = follower.followings.where(:followed => @user).last
+  following = follower.followings.where(:followed => current_user).last
 
   # if I'm following this user, get the status (requested, approved, denied)
   following_status = following.status unless following.nil?
