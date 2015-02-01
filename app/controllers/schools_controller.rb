@@ -5,7 +5,7 @@ class SchoolsController < ApplicationController
   def index
     if params[:hs_search]
       hs_search = params[:hs_search]
-      @schools = School.where("name LIKE ?", "%#{hs_search}%").order(:name)
+      @schools = School.where("name LIKE ?",  "%#{hs_search}%").order(:name)
     else
       @schools = School.order(:name)
 
