@@ -40,6 +40,8 @@ class SnapshotCommentsController < ApplicationController
     end
 
     def snapshot_comment_params
-      params[:snapshot_comment]
+      params.require(:snapshot_comment).permit(:user_id, :snapshot_id, :detail)
+
+      # params[:snapshot_comment]
     end
 end
