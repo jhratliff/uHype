@@ -3,7 +3,12 @@ class SchoolsController < ApplicationController
   before_action :set_school, only: [:show, :edit, :update, :destroy]
 
   def index
-    @schools = School.order(:name)
+    if params[:hs_search]
+      @schools = School.where('name LIKE %#{params[:hs_search]}%').order(:name)
+    else
+      @schools = School.order(:name)
+
+    end
     respond_with(@schools)
   end
 
