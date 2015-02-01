@@ -101,6 +101,84 @@ class SnapshotsController < ApplicationController
     respond_with(@snapshot)
   end
 
+
+
+
+
+
+
+  def flag
+    @user = current_user
+    if params[:snapshot_id]
+      @user.flagged_snapshots << Snapshot.find(params[:snapshot_id])
+    end
+    @snapshot = Snapshot.find(params[:snapshot_id])
+  end
+
+  def unflag
+    @user = current_user
+    if params[:snapshot_id]
+      @user.flagged_snapshots.destroy(Snapshot.find(params[:snapshot_id]))
+    end
+    @snapshot = Snapshot.find(params[:snapshot_id])
+  end
+
+
+  def like
+    @user = current_user
+    if params[:snapshot_id]
+      @user.liked_snapshots << Snapshot.find(params[:snapshot_id])
+    end
+    @snapshot = Snapshot.find(params[:snapshot_id])
+    @snapshot.like_count = @snapshot.snapshot_likes.count
+    @snapshot.save
+  end
+
+  def unlike
+    @user = current_user
+    if params[:snapshot_id]
+      @user.liked_snapshots.destroy(Snapshot.find(params[:snapshot_id]))
+    end
+    @snapshot = Snapshot.find(params[:snapshot_id])
+    @snapshot.like_count = @snapshot.snapshot_likes.count
+    @snapshot.save
+  end
+
+  def dislike
+    @user = current_user
+    if params[:snapshot_id]
+      @user.unliked_snapshots << Snapshot.find(params[:snapshot_id])
+    end
+    @snapshot = Snapshot.find(params[:snapshot_id])
+    @snapshot.unlike_count = @snapshot.snapshot_unlikes.count
+    @snapshot.save
+  end
+
+  def undislike
+    @user = current_user
+    if params[:snapshot_id]
+      @user.unliked_snapshots.destroy(Snapshot.find(params[:snapshot_id]))
+    end
+    @snapshot = Snapshot.find(params[:snapshot_id])
+    @snapshot.unlike_count = @snapshot.snapshot_unlikes.count
+    @snapshot.save
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   private
   def set_snapshot
     @snapshot = Snapshot.find(params[:id])

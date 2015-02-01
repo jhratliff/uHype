@@ -32,6 +32,15 @@ Rails.application.routes.draw do
   post "/comments/:comment_id/dislike" => "comments#dislike"
   post "/comments/:comment_id/undislike" => "comments#undislike"
 
+  post "/snapshots/:snapshot_id/flag" => "snapshots#flag"
+  post "/snapshots/:snapshot_id/unflag" => "snapshots#unflag"
+
+  post "/snapshots/:snapshot_id/like" => "snapshots#like"
+  post "/snapshots/:snapshot_id/unlike" => "snapshots#unlike"
+
+  post "/snapshots/:snapshot_id/dislike" => "snapshots#dislike"
+  post "/snapshots/:snapshot_id/undislike" => "snapshots#undislike"
+
   get "/messages/:recipient_id/chat" => "messages#chat"
 
 
