@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :snapshot_comments
+
   mount Upmin::Engine => '/admin'
 
   root to: 'visitors#index'

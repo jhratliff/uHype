@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
 
   has_many :messages
 
+  has_many :snapshot_comments
+
   # this would be all the messages I've sent
   has_many :sent_messages, :foreign_key => 'user_id', :class_name => 'Message'
 

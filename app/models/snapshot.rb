@@ -13,5 +13,7 @@ class Snapshot < ActiveRecord::Base
   has_many :snapshot_flags
   has_many :snapshot_flaggers, :through => :snapshot_flags, :source => :user
 
+  has_many :snapshot_comments
+
 
 end
