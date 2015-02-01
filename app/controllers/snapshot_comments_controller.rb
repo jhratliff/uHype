@@ -19,7 +19,9 @@ class SnapshotCommentsController < ApplicationController
   end
 
   def create
+    @user = current_user
     @snapshot_comment = SnapshotComment.new(snapshot_comment_params)
+    @snapshot_comment.user = @user
     flash[:notice] = 'SnapshotComment was successfully created.' if @snapshot_comment.save
     respond_with(@snapshot_comment)
   end
