@@ -168,7 +168,17 @@ class SnapshotsController < ApplicationController
 
 
 
+  # GET snapshots/:snapshot_id/feed
+  def feed
+    # returns the snapshot's feed
 
+    if params[:snapshot_id]
+      @snapshot_comments = Snapshot.find(params[:snapshot_id]).snapshot_comments.order(:id => :desc).last(100)
+    end
+
+    respond_with(@snapshot_comments)
+
+  end
 
 
 

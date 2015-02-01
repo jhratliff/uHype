@@ -43,6 +43,8 @@ Rails.application.routes.draw do
   post "/snapshots/:snapshot_id/dislike" => "snapshots#dislike"
   post "/snapshots/:snapshot_id/undislike" => "snapshots#undislike"
 
+  get "/snapshots/:snapshot_id/feed" => "snapshots#feed"
+
   get "/messages/:recipient_id/chat" => "messages#chat"
 
 
