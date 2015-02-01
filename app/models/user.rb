@@ -18,6 +18,15 @@ class User < ActiveRecord::Base
   has_many :unliked_comments, :through => :comment_unlikes, :source => :comment
 
   has_many :snapshots
+  has_many :snapshot_flags
+  has_many :flagged_snapshots, :through => :snapshot_flags, :source => :snapshot
+  has_many :snapshot_likes
+  has_many :liked_snapshots, :through => :snapshot_likes, :source => :snapshot
+  has_many :snapshot_unlikes
+  has_many :unliked_snapshots, :through => :snapshot_unlikes, :source => :snapshot
+
+
+
 
   has_many :messages
 
