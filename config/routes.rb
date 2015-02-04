@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get "/friend/:friend_id" => "users#friend"
   post "/users/:user_id/follow" => "users#follow"
   post "/users/:user_id/unfollow" => "users#unfollow"
-  post "/users/near_me/:latitude/:longitude/:distance" => "users#near_me"
+  post "/users/near_me" => "users#near_me"
 
 
   post "/followings/approve/:user_id" => "followings#approve"

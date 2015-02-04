@@ -200,11 +200,11 @@ class UsersController < ApplicationController
   end
 
   def near_me
-    if(params[:latitude] and params[:longitude] and params[:distance])
+    if(params[:location][:latitude] and params[:location][:longitude] and params[:location][:distance])
       @user = current_user
 
-      @user.longitude = params[:longitude]
-      @user.latitude = params[:latitude]
+      @user.longitude = params[:location][:longitude]
+      @user.latitude = params[:location][:latitude]
       @user.location_timestamp = Time.now.utc
 
       @users = User.where(:is_location_private => false).all
