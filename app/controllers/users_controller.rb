@@ -208,8 +208,9 @@ class UsersController < ApplicationController
       @user.longitude = params[:location][:longitude]
       @user.latitude = params[:location][:latitude]
       @user.location_timestamp = Time.now.utc
+      @user.save
 
-      @users = User.where(:is_location_private => false).all
+      @users = User.where('is_location_private=? AND (latitude !=? AND longitude !=?)', false, nil, nil).all
 
       # puts ".... found #{@users.count} users, proceeding to render"
       respond_with(@users)
