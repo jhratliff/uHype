@@ -4,7 +4,10 @@ json.array!(@users) do |user|
   json.avatar user.avatar.medium.url unless user.avatar.nil?
   json.followers user.followers.count
 
-  school = School.find(user.school)
-  json.school_name school.name
-
+  if user.school_id
+    school = School.find(user.school_id)
+    json.school_name school.name
+  else
+    json.school_name "Not Selected"
+  end
 end
