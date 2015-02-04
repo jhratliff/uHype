@@ -200,7 +200,9 @@ class UsersController < ApplicationController
   end
 
   def near_me
+    puts ".... hit the near_me controller"
     if(params[:location][:latitude] and params[:location][:longitude] and params[:location][:distance])
+      puts ".... have enough params"
       @user = current_user
 
       @user.longitude = params[:location][:longitude]
@@ -208,6 +210,8 @@ class UsersController < ApplicationController
       @user.location_timestamp = Time.now.utc
 
       @users = User.where(:is_location_private => false).all
+
+      puts ".... found #{@users.count} users, proceeding to render"
       respond_with(@users)
 
     end
