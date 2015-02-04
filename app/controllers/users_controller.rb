@@ -199,6 +199,20 @@ class UsersController < ApplicationController
 
   end
 
+  def near_me
+    if(params[:latitude] and params[:longitude] and params[:distance])
+      @user = current_user
+
+      @user.longitude = params[:longitude]
+      @user.latitude = params[:latitude]
+      @user.location_timestamp = Time.now.utc
+
+      @users = User.where(:is_location_private => false).all
+      respond_with(@users)
+
+    end
+  end
+
   private
 
   def secure_params
