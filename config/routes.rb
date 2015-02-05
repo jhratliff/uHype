@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   post "/users/:user_id/follow" => "users#follow"
   post "/users/:user_id/unfollow" => "users#unfollow"
   post "/users/near_me" => "users#near_me"
+  post "/users/register_notifications" => "users#register_notifications"
+  post "/users/unregister_notifications" => "users#unregister_notifications"
 
 
   post "/followings/approve/:user_id" => "followings#approve"

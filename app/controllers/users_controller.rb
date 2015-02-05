@@ -218,10 +218,27 @@ class UsersController < ApplicationController
     end
   end
 
+  def register_notifications
+    @user = current_user
+
+    if(params[:push_token])
+      @user.push_token = params[:push_token]
+      @user.save
+    end
+  end
+
+  def unregister_notifications
+    @user = current_user
+    if(@user.push_token)
+      @user.push_token = nil
+      @user.save
+    end
+  end
+
   private
 
   def secure_params
-    params.require(:user).permit(:role, :username, :first_name, :last_name, :dob, :class_of, :school_id, :is_private, :is_location_private, :latitude, :longitude, :avatar, :avatar_cache)
+    params.require(:user).permit(:role, :username, :first_name, :last_name, :dob, :class_of, :school_id, :is_private, :is_location_private, :push_token, :latitude, :longitude, :avatar, :avatar_cache)
     # not permitted to change from the outside.... :location_timestamp
   end
 
