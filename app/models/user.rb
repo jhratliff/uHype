@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
 
   def send_alert (payload)
 
-    if payload.length > 0
+    if payload.length > 0 and self.endpoint_arn.length > 0
       trimmed_message = payload[0..200]
       client = Aws::SNS::Client.new(region: 'us-west-2')
       apns_payload = {"aps" => {"alert" => trimmed_message}}.to_json
