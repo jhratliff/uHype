@@ -26,8 +26,6 @@ class User < ActiveRecord::Base
   has_many :unliked_snapshots, :through => :snapshot_unlikes, :source => :snapshot
 
 
-
-
   has_many :messages
 
   has_many :snapshot_comments
@@ -41,7 +39,7 @@ class User < ActiveRecord::Base
   has_many :received_messages, :foreign_key => 'recipient_id', :class_name => 'Message'
 
   # set up the friends relationships (people I follow)
-  has_many :followings                                              # the following records I created
+  has_many :followings # the following records I created
   has_many :friends, :through => :followings, :source => 'followed' # the user records of people I follow from the records I created
 
   # set up the followers relationships (people who follow me)
@@ -53,20 +51,23 @@ class User < ActiveRecord::Base
   end
 
   def send_alert (payload)
-    trimmed_message = payload[0..200]
-    client = Aws::SNS::Client.new(region:'us-west-2')
-    apns_payload = { "aps" => { "alert" => trimmed_message} }.to_json
-    message = { "default" => "alert message", "APNS" => apns_payload }.to_json
 
-    client.publish( message: message, target_arn: self.endpoint_arn, message_structure: 'json' )
+    if payload.length > 0
+      trimmed_message = payload[0..200]
+      client = Aws::SNS::Client.new(region: 'us-west-2')
+      apns_payload = {"aps" => {"alert" => trimmed_message}}.to_json
+      message = {"default" => "alert message", "APNS" => apns_payload}.to_json
+
+      client.publish(message: message, target_arn: self.endpoint_arn, message_structure: 'json')
+    end
   end
 
   def send_badge (badge_count)
-    client = Aws::SNS::Client.new(region:'us-west-2')
-    apns_payload = { "aps" => { "badge" => badge_count} }.to_json
-    message = { "default" => "badge count update", "APNS" => apns_payload }.to_json
+    client = Aws::SNS::Client.new(region: 'us-west-2')
+    apns_payload = {"aps" => {"badge" => badge_count}}.to_json
+    message = {"default" => "badge count update", "APNS" => apns_payload}.to_json
 
-    client.publish( message: message, target_arn: self.endpoint_arn, message_structure: 'json' )
+    client.publish(message: message, target_arn: self.endpoint_arn, message_structure: 'json')
   end
 
   # Include default devise modules. Others available are:
