@@ -224,7 +224,7 @@ class UsersController < ApplicationController
     if(params[:push_token])
       @user.push_token = params[:push_token]
 
-      client = Aws::SNS.new.client
+      client = Aws::SNS.Client.new(region: 'us-west-2')
       response = client.create_platform_endpoint(
           platform_application_arn: "arn:aws:sns:us-west-2:844150499332:app/APNS/uHype",
           token: params[:push_token]
