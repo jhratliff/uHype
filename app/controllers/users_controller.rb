@@ -233,7 +233,7 @@ class UsersController < ApplicationController
       )
       @user.endpoint_arn = response[:endpoint_arn]
       @user.save
-      # puts ">>>>>>>>>>>>> token saved: #{params[:push_token]}"
+      puts ">>>>>>>>>>>>> token saved: #{params[:push_token]}"
     end
   end
 
