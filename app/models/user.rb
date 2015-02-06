@@ -53,38 +53,19 @@ class User < ActiveRecord::Base
   end
 
   def send_alert (payload)
-
-    # message = {
-    #     "APNS" => {
-    #         "aps" => { "content-available" => true },
-    #         "alert" => payload
-    #     }.to_json,
-    #     "APNS_SANDBOX" => {
-    #         "aps" => { "content-available" => true },
-    #         "alert" => payload
-    #     }.to_json
-    # }
-    # push_parameters = {
-    #     target_arn: self.endpoint_arn,
-    #     message_structure: "json",
-    #     message: message.to_json
-    # }
-
     client = Aws::SNS::Client.new(region:'us-west-2')
-    # apns_payload = { "aps" => { "alert" => "hey it worked!", "badge" => 14 } }.to_json
     apns_payload = { "aps" => { "alert" => payload} }.to_json
-    message = { "default" => "this is the default", "APNS" => apns_payload }.to_json
+    message = { "default" => "alert message", "APNS" => apns_payload }.to_json
 
     client.publish( message: message, target_arn: self.endpoint_arn, message_structure: 'json' )
+  end
 
+  def send_badge (badge_count)
+    client = Aws::SNS::Client.new(region:'us-west-2')
+    apns_payload = { "aps" => { "badge" => badge_count} }.to_json
+    message = { "default" => "badge count update", "APNS" => apns_payload }.to_json
 
-
-
-
-    # response = client.publish(push_parameters)
-
-    # puts "Message sent...: " . response
-
+    client.publish( message: message, target_arn: self.endpoint_arn, message_structure: 'json' )
   end
 
   # Include default devise modules. Others available are:
