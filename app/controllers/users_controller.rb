@@ -224,7 +224,7 @@ class UsersController < ApplicationController
     if(params[:push_token])
       @user.push_token = params[:push_token]
       @user.save
-      puts ">>>>>>>>>>>>> token saved: #{params[:push_token]}"
+      # puts ">>>>>>>>>>>>> token saved: #{params[:push_token]}"
     end
   end
 
