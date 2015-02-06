@@ -57,11 +57,11 @@ class User < ActiveRecord::Base
     message = {
         "APNS" => {
             "aps" => { "content-available" => true },
-            "other_data" => payload
+            "alert" => payload
         }.to_json,
         "APNS_SANDBOX" => {
             "aps" => { "content-available" => true },
-            "other_data" => payload
+            "alert" => payload
         }.to_json
     }
     push_parameters = {
@@ -71,6 +71,15 @@ class User < ActiveRecord::Base
     }
 
     client = Aws::SNS::Client.new(region:'us-west-2')
+    # apns_payload = { "aps" => { "alert" => "hey it worked!", "badge" => 14 } }.to_json
+    # message = { "default" => "this is the default", "APNS" => apns_payload }.to_json
+    #
+    # client.publish( message: message, target_arn: your_endpoint_arn, message_structure: 'json' )
+
+
+
+
+
     response = client.publish(push_parameters)
 
     # puts "Message sent...: " . response
