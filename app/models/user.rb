@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
         message: message.to_json
     }
 
-    client = Aws::SNS::Client.new
+    client = Aws::SNS::Client.new(region:'us-west-2')
     response = client.publish(push_parameters)
 
     puts "Message sent...: " . response
