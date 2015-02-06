@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
         message: message.to_json
     }
 
-    client = AWS::SNS::Client.new
+    client = Aws::SNS::Client.new
     response = client.publish(push_parameters)
 
     puts "Message sent...: " . response
