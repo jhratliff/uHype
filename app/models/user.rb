@@ -53,8 +53,9 @@ class User < ActiveRecord::Base
   end
 
   def send_alert (payload)
+    trimmed_message = payload[0..200]
     client = Aws::SNS::Client.new(region:'us-west-2')
-    apns_payload = { "aps" => { "alert" => payload} }.to_json
+    apns_payload = { "aps" => { "alert" => trimmed_message} }.to_json
     message = { "default" => "alert message", "APNS" => apns_payload }.to_json
 
     client.publish( message: message, target_arn: self.endpoint_arn, message_structure: 'json' )

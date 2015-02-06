@@ -27,6 +27,9 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.user = current_user
 
+    @recipient = User.find(@message.recipient_id)
+    @recipient.send_alert(@message.detail)
+
     @message.save
 
     # puts "JHRLOG: new snapshot is created, lacking the image"
