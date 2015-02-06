@@ -52,6 +52,31 @@ class User < ActiveRecord::Base
     self.role ||= :user
   end
 
+  def send_notification (payload)
+
+    message = {
+        "APNS" => {
+            "aps" => { "content-available" => true },
+            "other_data" => payload
+        }.to_json,
+        "APNS_SANDBOX" => {
+            "aps" => { "content-available" => true },
+            "other_data" => payload
+        }.to_json
+    }
+    push_parameters = {
+        target_arn: self.endpoint_arn,
+        message_structure: "json",
+        message: message.to_json
+    }
+
+    client = AWS::SNS::Client.new
+    response = client.publish(push_parameters)
+
+    puts "Message sent...: " . response
+
+  end
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
