@@ -77,11 +77,16 @@ class User < ActiveRecord::Base
   end
 
   def send_badge (badge_count)
-    client = Aws::SNS::Client.new(region: 'us-west-2')
-    apns_payload = {"aps" => {"badge" => badge_count}}.to_json
-    message = {"default" => "badge count update", "APNS" => apns_payload}.to_json
 
-    client.publish(message: message, target_arn: self.endpoint_arn, message_structure: 'json')
+    safe_badge_count = 0 if badge_count.nil?
+
+    if !self.endpoint_arn.nil? and self.endpoint_arn.length > 0
+      client = Aws::SNS::Client.new(region: 'us-west-2')
+      apns_payload = {"aps" => {"badge" => safe_badge_count}}.to_json
+      message = {"default" => "badge count update", "APNS" => apns_payload}.to_json
+
+      client.publish(message: message, target_arn: self.endpoint_arn, message_structure: 'json')
+    end
   end
 
   # Include default devise modules. Others available are:
