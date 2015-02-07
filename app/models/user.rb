@@ -58,6 +58,7 @@ class User < ActiveRecord::Base
   end
 
   def increment_badge
+    self.badge_count = 0 if self.badge_count.nil?
     self.badge_count += 1
     self.save
     self.send_badge(self.badge_count)
