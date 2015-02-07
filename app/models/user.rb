@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   end
 
   def increment_badge
-    self.badge_count = 0 if self.badge_count.nil?
+    self.badge_count = self.badge_count.to_i
     self.badge_count += 1
     self.save
     self.send_badge(self.badge_count)
@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
 
   def send_badge (badge_count)
 
-    safe_badge_count = 0 if badge_count.nil?
+    safe_badge_count = badge_count.to_i
 
     puts ">>>>>>>>>>>>>> Badge: #{safe_badge_count} being sent to #{self.id}: #{self.first_name} #{self.last_name}"
 
