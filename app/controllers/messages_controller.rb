@@ -30,6 +30,8 @@ class MessagesController < ApplicationController
     @recipient = User.find(@message.recipient_id)
     @recipient.send_alert(current_user.first_name + " " + current_user.last_name + ": " + @message.detail)
 
+    @recipient.increment_badge
+
     @message.save
 
     # puts "JHRLOG: new snapshot is created, lacking the image"

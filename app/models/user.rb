@@ -50,6 +50,19 @@ class User < ActiveRecord::Base
     self.role ||= :user
   end
 
+
+  def clear_badge
+    self.badge_count = 0
+    self.save
+    self.send_badge(0)
+  end
+
+  def increment_badge
+    self.badge_count += 1
+    self.save
+    self.send_badge(self.badge_count)
+  end
+
   def send_alert (payload)
 
     if !payload.nil? and payload.length > 0 and !self.endpoint_arn.nil? and self.endpoint_arn.length > 0

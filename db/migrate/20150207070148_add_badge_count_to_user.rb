@@ -1,0 +1,5 @@
+class AddBadgeCountToUser < ActiveRecord::Migration
+  def change
+    add_column :users, :badge_count, :integer
+  end
+end
