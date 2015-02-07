@@ -28,7 +28,7 @@ class MessagesController < ApplicationController
     @message.user = current_user
 
     @recipient = User.find(@message.recipient_id)
-    @recipient.send_alert(@user.first_name + " " + @user.last_name + ": " + @message.detail)
+    @recipient.send_alert(current_user.first_name + " " + current_user.last_name + ": " + @message.detail)
 
     @message.save
 
