@@ -28,6 +28,9 @@ class MessagesController < ApplicationController
     @message.user = current_user
 
     @recipient = User.find(@message.recipient_id)
+
+    puts ">>>>>>>>>>>>>> Message Create from #{current_user.id}: #{current_user.first_name} #{current_user.last_name} to #{@recipient.id}: #{@recipient.first_name} #{@recipient.last_name}"
+
     @recipient.send_alert(current_user.first_name + " " + current_user.last_name + ": " + @message.detail)
 
     @recipient.increment_badge

@@ -67,6 +67,9 @@ class User < ActiveRecord::Base
   def send_alert (payload)
 
     if !payload.nil? and payload.length > 0 and !self.endpoint_arn.nil? and self.endpoint_arn.length > 0
+
+      puts ">>>>>>>>>>>>>> Push Notification: #{payload} being sent to #{self.id}: #{self.first_name} #{self.last_name}"
+
       trimmed_message = payload[0..200]
       client = Aws::SNS::Client.new(region: 'us-west-2')
       apns_payload = {"aps" => {"alert" => trimmed_message}}.to_json
@@ -79,6 +82,8 @@ class User < ActiveRecord::Base
   def send_badge (badge_count)
 
     safe_badge_count = 0 if badge_count.nil?
+
+    puts ">>>>>>>>>>>>>> Badge: #{safe_badge_count} being sent to #{self.id}: #{self.first_name} #{self.last_name}"
 
     if !self.endpoint_arn.nil? and self.endpoint_arn.length > 0
       client = Aws::SNS::Client.new(region: 'us-west-2')
