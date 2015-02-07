@@ -97,6 +97,12 @@ class UsersController < ApplicationController
 
       if (params[:loadme][:status_code])
         @user.status_code = params[:loadme][:status_code]
+
+        if (@user.status_code == "ok")
+          @user.status_code = nil
+          @user.action_code = nil
+        end
+
         save_user = true
       end
 
