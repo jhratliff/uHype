@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   root to: 'visitors#index'
 
-  get "/users/me" => "users#me"
+  post "/users/me" => "users#me"
   get "/users/feed" => "users#feed"
   get "/users/:user_id/friends" => "users#friends"
   get "/users/friends" => "users#friends"

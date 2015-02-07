@@ -87,6 +87,23 @@ class UsersController < ApplicationController
 
     puts ">>>>>> ME requested, returning First Name: #{@user.first_name}, Last Name: #{@user.last_name}, Email: #{@user.email}"
 
+    save_user = false
+
+    if (params[:loadme])
+      if (params[:loadme][:version_number])
+        @user.version_number = params[:loadme][:version_number]
+        save_user = true
+      end
+
+      if (params[:loadme][:status_code])
+        @user.status_code = params[:loadme][:status_code]
+        save_user = true
+      end
+
+      @user.save if save_user
+
+    end
+
     respond_with(@user)
   end
 
