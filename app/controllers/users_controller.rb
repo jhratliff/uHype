@@ -263,6 +263,7 @@ class UsersController < ApplicationController
   def unregister_notifications
     @user = current_user
     if(@user.push_token)
+      @user.endpoint_arn = nil
       @user.push_token = nil
       @user.save
     end
