@@ -75,7 +75,17 @@ class User < ActiveRecord::Base
       apns_payload = {"aps" => {"alert" => trimmed_message}}.to_json
       message = {"default" => "alert message", "APNS" => apns_payload}.to_json
 
-      client.publish(message: message, target_arn: self.endpoint_arn, message_structure: 'json')
+
+
+      begin
+        client.publish(message: message, target_arn: self.endpoint_arn, message_structure: 'json')
+
+      rescue Aws::Errors::ServiceError => error
+        puts "An error of type #{error.class} happened, message is #{error.message}"
+      end
+
+
+
     end
   end
 
@@ -90,7 +100,12 @@ class User < ActiveRecord::Base
       apns_payload = {"aps" => {"badge" => safe_badge_count}}.to_json
       message = {"default" => "badge count update", "APNS" => apns_payload}.to_json
 
-      client.publish(message: message, target_arn: self.endpoint_arn, message_structure: 'json')
+      begin
+        client.publish(message: message, target_arn: self.endpoint_arn, message_structure: 'json')
+      rescue Aws::Errors::ServiceError => error
+        puts "An error of type #{error.class} happened, message is #{error.message}"
+      end
+
     end
   end
 
