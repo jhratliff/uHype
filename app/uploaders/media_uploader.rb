@@ -5,10 +5,14 @@ class MediaUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
+  include CarrierWave::MimeTypes
 
   # Choose what kind of storage to use for this uploader:
   # storage :file
   storage :fog
+
+  # be sure to process the content type
+  process :set_content_type
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -25,11 +29,11 @@ class MediaUploader < CarrierWave::Uploader::Base
   # end
 
   # fix broken orientations
-  # def auto_orient
-  #   manipulate! do |img|
-  #     img.tap(&:auto_orient)
-  #   end
-  # end
+  def auto_orient
+    manipulate! do |img|
+      img.tap(&:auto_orient)
+    end
+  end
 
   # process :auto_orient
 
@@ -45,12 +49,12 @@ class MediaUploader < CarrierWave::Uploader::Base
   #   # process :auto_orient
   #   process :resize_to_fill =>  [800, 800]
   # end
-  #
-  # version :medium do
-  #   # process :auto_orient
-  #   process :resize_to_fill => [160, 160]
-  # end
-  #
+
+  version :medium, :if => :image?  do
+    process :auto_orient
+    process :resize_to_fill => [400, 400]
+  end
+
   # version :thumb do
   #   # process :auto_orient
   #   process :resize_to_fill => [80, 80]
@@ -63,6 +67,7 @@ class MediaUploader < CarrierWave::Uploader::Base
   #
   # # Add a white list of extensions which are allowed to be uploaded.
   # # For images you might use something like this:
+
   def extension_white_list
     %w(jpg jpeg gif png mov)
   end
@@ -72,4 +77,9 @@ class MediaUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  protected
+    def image?(new_file)
+      new_file.content_type.start_with? 'image'
+    end
 end
