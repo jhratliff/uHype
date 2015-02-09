@@ -81,7 +81,12 @@ class User < ActiveRecord::Base
         client.publish(message: message, target_arn: self.endpoint_arn, message_structure: 'json')
 
       rescue Aws::Errors::ServiceError => error
-        puts "An error of type #{error.class} happened, message is #{error.message}"
+        puts "ERROR!!!!! An error of type #{error.class} happened, message is #{error.message}"
+        client.delete_endpoint(endpoint_arn: self.endpoint_arn)
+        self.endpoint_arn = nil
+        self.push_token = nil
+        self.action_code = "unregister_push"
+        self.save
       end
 
 
@@ -103,11 +108,24 @@ class User < ActiveRecord::Base
       begin
         client.publish(message: message, target_arn: self.endpoint_arn, message_structure: 'json')
       rescue Aws::Errors::ServiceError => error
-        puts "An error of type #{error.class} happened, message is #{error.message}"
+        puts "ERROR!!!!! An error of type #{error.class} happened, message is #{error.message}"
+
+        client.delete_endpoint(endpoint_arn: self.endpoint_arn)
+        self.endpoint_arn = nil
+        self.push_token = nil
+        self.action_code = "unregister_push"
+        self.save
       end
 
     end
   end
+
+
+  def remove_endpoint
+
+  end
+
+
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
