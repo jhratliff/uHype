@@ -131,7 +131,11 @@ class MessagesController < ApplicationController
 
   # POST /messages/:id/time
   def viewed_time
+
+    puts "####### inside viewed_time"
+
     if params[:timer_left]
+      puts '********** found a value, saving it'
       @message.timer_left = params[:timer_left]
       @message.save
       respond_with(@message)
