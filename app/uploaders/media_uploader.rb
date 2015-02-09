@@ -52,7 +52,7 @@ class MediaUploader < CarrierWave::Uploader::Base
 
   version :medium, :if => :image?  do
     process :auto_orient
-    process :resize_to_fill => [400, 400]
+    process :resize_to_fill => [200, 200]
   end
 
   # version :thumb do
