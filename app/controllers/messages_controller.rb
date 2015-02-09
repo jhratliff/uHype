@@ -133,6 +133,7 @@ class MessagesController < ApplicationController
   def viewed_time
     if params[:timer_left]
       @message.timer_left = params[:timer_left]
+      @message.save
       respond_with(@message)
     end
   end
