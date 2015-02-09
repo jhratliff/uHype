@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :set_message, only: [:show, :edit, :update, :destroy, :viewed_time]
 
   # GET /messages
   # GET /messages.json
@@ -126,6 +126,14 @@ class MessagesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to messages_url, notice: 'Message was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # POST /messages/:id/time
+  def viewed_time
+    if params[:timer_left]
+      @message.timer_left = params[:timer_left]
+      respond_with(@message)
     end
   end
 

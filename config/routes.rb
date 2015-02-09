@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   get "/snapshots/:snapshot_id/feed" => "snapshots#feed"
 
   get "/messages/:recipient_id/chat" => "messages#chat"
+  post "/messages/:id/time" => "messages#viewed_time"
 
 
   devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}
