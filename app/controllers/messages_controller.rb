@@ -65,12 +65,14 @@ class MessagesController < ApplicationController
     if params[:message] && params[:message][:media_path] && params[:message][:media_path]["media_file"]
       # puts "JHRLOG: found a file entry"
 
+      incoming_filename = params[:message][:media_path][:filename]
+
 
       media_path_params = params[:message][:media_path]
 
       #create a new tempfile named fileupload
 
-      tempfile = Tempfile.new("media.jpg", Rails.root.join('tmp'))
+      tempfile = Tempfile.new(incoming_filename, Rails.root.join('tmp'))
 
       # puts"JHRLOG: tempfile opened at #{tempfile.path}"
 
@@ -88,7 +90,7 @@ class MessagesController < ApplicationController
       # puts "JHRLOG: tempfile size after decode64 is #{tempfile.size}"
 
       #create a new uploaded file
-      uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => "media.jpg", :original_filename => "media.jpg")
+      uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => incoming_filename, :original_filename => incoming_filename)
 
       # puts "JHRLOG: uploaded file object has been created "
 
