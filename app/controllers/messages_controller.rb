@@ -85,7 +85,7 @@ class MessagesController < ApplicationController
 
 
       #get the file and decode it with base64 then write it to the tempfile
-      tempfile.write(URI::unescape(Base64.decode64(base64file)))
+      tempfile.write(URI::unescape(CGI::escape(Base64.decode64(base64file))))
 
       # puts "JHRLOG: tempfile size after decode64 is #{tempfile.size}"
 
