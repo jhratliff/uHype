@@ -3,5 +3,6 @@ json.array!(@messages) do |message|
   json.url message_url(message, format: :json)
   # json.media_url message.media.url
   json.media_url message.media.medium.url unless message.media.nil?
+  json.raw_media_url message.media.url unless message.media.nil?
 
 end
