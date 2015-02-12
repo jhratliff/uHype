@@ -99,7 +99,7 @@ class MessagesController < ApplicationController
       # params[:snapshot][:photo] = uploaded_file
 
       @message.media = uploaded_file
-      @message.timer_left = 8
+      @message.timer_left = 30
 
       # puts "JHRLOG: snapshot has been assigned an upload image"
       if @message.save
