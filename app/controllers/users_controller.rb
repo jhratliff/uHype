@@ -129,7 +129,6 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
-
   def follow
     @user = current_user
 
@@ -201,7 +200,6 @@ class UsersController < ApplicationController
     respond_with(@snapshots)
 
   end
-
 
   def feed
     # returns the user's feed

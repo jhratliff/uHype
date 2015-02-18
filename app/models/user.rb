@@ -46,6 +46,11 @@ class User < ActiveRecord::Base
   has_many :followeds, :class_name => 'Following', :foreign_key => 'followed_id' # the following records where I'm being followed, created by others
   has_many :followers, :through => :followeds, :source => :user # the user records associated with the following records where I'm being followed
 
+
+  # direct message (chat) alerts
+  has_many :chat_alerts
+  has_many :chat_alerts_received, :class_name => "ChatAlert", :foreign_key => 'recipient_id'
+
   def set_default_role
     self.role ||= :user
   end
