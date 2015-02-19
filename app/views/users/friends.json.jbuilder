@@ -8,6 +8,7 @@ json.avatar_small @response[:user].avatar.small.url
 json.friends @response[:user].friends.order(id: :desc) do | friend |
 
   json.id friend.id
+  json.unseen_chats_count friend.unseen_chats_count(@response[:user].id)
   json.first_name friend.first_name
   json.last_name friend.last_name
   json.class_of friend.class_of
