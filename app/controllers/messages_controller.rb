@@ -111,6 +111,8 @@ class MessagesController < ApplicationController
 
     # record the unviewed message
 
+    @message.reload
+
     ca = ChatAlert.new()
     ca.user = current_user
     ca.recipient = @recipient
