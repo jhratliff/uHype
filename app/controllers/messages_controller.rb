@@ -170,7 +170,7 @@ class MessagesController < ApplicationController
     @messages = (Message.where(:user => current_user, :recipient =>partner) + Message.where(:user => partner, :recipient => current_user)).sort_by{|e| e[:id]}
 
     # remove all the chat alerts associated with this message since the recipient is now presumably viewing it
-    @messages.each {|m| m.chat_alerts.destroy_all}
+    @messages.each {|m| m.chat_alerts.where(:recipient => current_user).destroy_all}
 
     respond_with(@messages)
   end
