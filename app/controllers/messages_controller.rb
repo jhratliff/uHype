@@ -31,13 +31,11 @@ class MessagesController < ApplicationController
 
     puts ">>>>>>>>>>>>>> Message Create from #{current_user.id}: #{current_user.first_name} #{current_user.last_name} to #{@recipient.id}: #{@recipient.first_name} #{@recipient.last_name}"
 
-
     if @message.detail.nil? or @message.detail.empty?
       @recipient.send_alert(current_user.first_name + " " + current_user.last_name + ": sent a media file")
     else
       @recipient.send_alert(current_user.first_name + " " + current_user.last_name + ": " + @message.detail)
     end
-
 
     @recipient.increment_badge
 
@@ -60,7 +58,6 @@ class MessagesController < ApplicationController
 
     #check if file is within picture_path
     # if(params.has_key?(:message) && params.has_key?(:media_path) && params.has_key?("media_file"))
-
 
     if params[:message] && params[:message][:media_path] && params[:message][:media_path]["media_file"]
       # puts "JHRLOG: found a file entry"
@@ -112,6 +109,14 @@ class MessagesController < ApplicationController
 
     # puts "JHRLOG: after the base64 file processing"
 
+    # record the unviewed message
+
+    ca = ChatAlert.new()
+    ca.user = current_user
+    ca.recipient = @recipient
+    ca.message = @message
+    ca.save
+
     respond_with(@message)
   end
 
@@ -152,7 +157,6 @@ class MessagesController < ApplicationController
     end
   end
 
-
   # returns the chat conversation between the recipient and me in ascending order
   # input expects a recipient_id value in the params array
   def chat
@@ -162,6 +166,10 @@ class MessagesController < ApplicationController
     # (Message.where(:user => u, :recipient =>p) + Message.where(:user => p, :recipient => u)).sort_by{|e| -e[:id]}
 
     @messages = (Message.where(:user => current_user, :recipient =>partner) + Message.where(:user => partner, :recipient => current_user)).sort_by{|e| e[:id]}
+
+    # remove all the chat alerts associated with this message since the recipient is now presumably viewing it
+    @messages.each {|m| m.chat_alerts.delete_all}
+
     respond_with(@messages)
   end
 

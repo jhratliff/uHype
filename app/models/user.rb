@@ -125,11 +125,13 @@ class User < ActiveRecord::Base
     end
   end
 
-
   def remove_endpoint
 
   end
 
+  def unseen_chats (user_id)
+    self.chat_alerts.where(recipient_id: user_id)
+  end
 
 
   # Include default devise modules. Others available are:
