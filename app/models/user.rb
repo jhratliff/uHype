@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
 
   # direct message (chat) alerts
   has_many :chat_alerts
-  # has_many :chat_alerts_received, :class_name => "ChatAlert", :foreign_key => 'recipient_id'
+  has_many :chat_alerts_received, :class_name => "ChatAlert", :foreign_key => 'recipient_id'
 
   def set_default_role
     self.role ||= :user
