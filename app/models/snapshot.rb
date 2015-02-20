@@ -1,5 +1,6 @@
 class Snapshot < ActiveRecord::Base
   mount_uploader :photo, PhotoUploader
+  mount_uploader :video, PhotoUploader
 
   belongs_to :user
 

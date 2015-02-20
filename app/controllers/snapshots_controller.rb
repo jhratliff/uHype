@@ -39,11 +39,11 @@ class SnapshotsController < ApplicationController
     # puts "JHRLOG: new snapshot is created, lacking the image"
 
     #check if file is within picture_path
-    if params[:snapshot][:snapshot_path]["snapshot_file"]
+    if params[:snapshot][:snapshot_image]["snapshot_file"]
       # puts "JHRLOG: found a file entry"
 
 
-      snapshot_path_params = params[:snapshot][:snapshot_path]
+      snapshot_image_params = params[:snapshot][:snapshot_image]
 
       #create a new tempfile named fileupload
 
@@ -56,7 +56,7 @@ class SnapshotsController < ApplicationController
 
       # the buffer may be coming in with a base64 descriptor... trim it off the front
       # base64file = snapshot_path_params["snapshot_file"].partition(',').last
-      base64file = snapshot_path_params["snapshot_file"]
+      base64file = snapshot_image_params["snapshot_file"]
 
 
       #get the file and decode it with base64 then write it to the tempfile
@@ -79,8 +79,48 @@ class SnapshotsController < ApplicationController
         # puts "JHRLOG: snapshot has been saved with the image"
         tempfile.unlink
       end
+    end
+
+    #process the video file if it exists
+    if params[:snapshot][:snapshot_video]["snapshot_file"]
+      # puts "JHRLOG: found a file entry"
+
+      snapshot_video_params = params[:snapshot][:snapshot_video]
+
+      #create a new tempfile named fileupload
+
+      tempfile = Tempfile.new("snapshot.mov", Rails.root.join('tmp'))
+
+      # puts"JHRLOG: tempfile opened at #{tempfile.path}"
+
+      tempfile.binmode
+      # puts"JHRLOG: tempfile binmode set"
+
+      # the buffer may be coming in with a base64 descriptor... trim it off the front
+      # base64file = snapshot_path_params["snapshot_file"].partition(',').last
+      base64file = snapshot_video_params["snapshot_file"]
 
 
+      #get the file and decode it with base64 then write it to the tempfile
+      tempfile.write(Base64.decode64(base64file))
+
+      # puts "JHRLOG: tempfile size after decode64 is #{tempfile.size}"
+
+      #create a new uploaded file
+      uploaded_file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => "snapshot.mov", :original_filename => "snapshot.mov")
+
+      # puts "JHRLOG: uploaded file object has been created "
+
+      #replace photo element with the new uploaded file
+      # params[:snapshot][:photo] = uploaded_file
+
+      @snapshot.video = uploaded_file
+
+      # puts "JHRLOG: snapshot has been assigned an upload image"
+      if @snapshot.save
+        # puts "JHRLOG: snapshot has been saved with the image"
+        tempfile.unlink
+      end
     end
 
     # puts "JHRLOG: after the base64 file processing"

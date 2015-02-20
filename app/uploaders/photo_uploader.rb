@@ -5,6 +5,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
+  include CarrierWave::MimeTypes
 
   # Choose what kind of storage to use for this uploader:
   # storage :file
@@ -18,10 +19,10 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url
-  #   # For Rails 3.1+ asset pipeline compatibility:
+    #   # For Rails 3.1+ asset pipeline compatibility:
     ActionController::Base.helpers.asset_path("images/fallback/" + [version_name, "default_photo.png"].compact.join('_'))
-  #
-  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
+    #
+    #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   end
 
   # fix broken orientations
@@ -41,22 +42,22 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  version :large do
+  version :large, :if => :image? do
     # process :auto_orient
-    process :resize_to_fill =>  [800, 800]
+    process :resize_to_fill => [800, 800]
   end
 
-  version :medium do
+  version :medium, :if => :image? do
     # process :auto_orient
     process :resize_to_fill => [160, 160]
   end
 
-  version :thumb do
+  version :thumb, :if => :image? do
     # process :auto_orient
     process :resize_to_fill => [80, 80]
   end
 
-  version :small do
+  version :small, :if => :image? do
     # process :auto_orient
     process :resize_to_fill => [40, 40]
   end
@@ -64,7 +65,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_white_list
-    %w(jpg jpeg gif png)
+  %w(jpg jpeg gif png mov)
   # end
 
   # Override the filename of the uploaded files:
@@ -72,5 +73,9 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+  protected
+  def image?(new_file)
+    new_file.content_type.start_with? 'image'
+  end
 
 end
