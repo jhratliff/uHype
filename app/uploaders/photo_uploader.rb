@@ -11,6 +11,9 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # storage :file
   storage :fog
 
+  # be sure to process the content type
+  process :set_content_type
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
@@ -32,7 +35,6 @@ class PhotoUploader < CarrierWave::Uploader::Base
     end
   end
 
-  process :auto_orient
 
   # Process files as they are uploaded:
   # process :scale => [200, 300]
@@ -43,22 +45,22 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :large, :if => :image? do
-    # process :auto_orient
+    process :auto_orient
     process :resize_to_fill => [800, 800]
   end
 
   version :medium, :if => :image? do
-    # process :auto_orient
+    process :auto_orient
     process :resize_to_fill => [160, 160]
   end
 
   version :thumb, :if => :image? do
-    # process :auto_orient
+    process :auto_orient
     process :resize_to_fill => [80, 80]
   end
 
   version :small, :if => :image? do
-    # process :auto_orient
+    process :auto_orient
     process :resize_to_fill => [40, 40]
   end
 
