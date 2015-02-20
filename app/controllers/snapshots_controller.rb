@@ -39,7 +39,7 @@ class SnapshotsController < ApplicationController
     # puts "JHRLOG: new snapshot is created, lacking the image"
 
     #check if file is within picture_path
-    if params[:snapshot][:snapshot_image]["snapshot_file"]
+    if params[:snapshot] and params[:snapshot][:snapshot_image] and params[:snapshot][:snapshot_image]["snapshot_file"]
       # puts "JHRLOG: found a file entry"
 
 
@@ -82,7 +82,7 @@ class SnapshotsController < ApplicationController
     end
 
     #process the video file if it exists
-    if params[:snapshot][:snapshot_video]["snapshot_file"]
+    if params[:snapshot] and params[:snapshot][:snapshot_video] and params[:snapshot][:snapshot_video]["snapshot_file"]
       # puts "JHRLOG: found a file entry"
 
       snapshot_video_params = params[:snapshot][:snapshot_video]
