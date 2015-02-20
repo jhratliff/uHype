@@ -14,4 +14,4 @@ json.photo_medium @snapshot.photo.medium.url
 json.photo_thumb @snapshot.photo.thumb.url
 json.photo_small @snapshot.photo.small.url
 
-
+json.video @snapshot.video.url
