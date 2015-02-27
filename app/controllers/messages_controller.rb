@@ -96,7 +96,13 @@ class MessagesController < ApplicationController
       # params[:snapshot][:photo] = uploaded_file
 
       @message.media = uploaded_file
-      @message.timer_left = 30
+
+      if incoming_filename.end_with? "mov"
+        @message.timer_left = 30
+      else
+        @message.timer_left = 15
+      end
+
 
       # puts "JHRLOG: snapshot has been assigned an upload image"
       if @message.save
@@ -167,7 +173,8 @@ class MessagesController < ApplicationController
     # sort descending
     # (Message.where(:user => u, :recipient =>p) + Message.where(:user => p, :recipient => u)).sort_by{|e| -e[:id]}
 
-    @messages = (Message.where(:user => current_user, :recipient =>partner) + Message.where(:user => partner, :recipient => current_user)).sort_by{|e| e[:id]}
+    # @messages = (Message.where(:user => current_user, :recipient =>partner) + Message.where(:user => partner, :recipient => current_user)).sort_by{|e| e[:id]}
+    @messages = (Message.where(:user => current_user, :recipient =>partner, created_at: 24.hours.ago..DateTime.now) + Message.where(:user => partner, :recipient => current_user, created_at: 24.hours.ago..DateTime.now)).sort_by{|e| e[:id]}
 
     # remove all the chat alerts associated with this message since the recipient is now presumably viewing it
     @messages.each {|m| m.chat_alerts.where(:recipient => current_user).destroy_all}
