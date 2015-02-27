@@ -174,10 +174,14 @@ class MessagesController < ApplicationController
     # (Message.where(:user => u, :recipient =>p) + Message.where(:user => p, :recipient => u)).sort_by{|e| -e[:id]}
 
     # @messages = (Message.where(:user => current_user, :recipient =>partner) + Message.where(:user => partner, :recipient => current_user)).sort_by{|e| e[:id]}
+
+    # clear all the old chat alerts
+    (Message.where(:user => current_user, :recipient =>partner) + Message.where(:user => partner, :recipient => current_user)).each {|m| m.chat_alerts.where(:recipient => current_user).destroy_all}
+
     @messages = (Message.where(:user => current_user, :recipient =>partner, created_at: 24.hours.ago..DateTime.now) + Message.where(:user => partner, :recipient => current_user, created_at: 24.hours.ago..DateTime.now)).sort_by{|e| e[:id]}
 
     # remove all the chat alerts associated with this message since the recipient is now presumably viewing it
-    @messages.each {|m| m.chat_alerts.where(:recipient => current_user).destroy_all}
+    # @messages.each {|m| m.chat_alerts.where(:recipient => current_user).destroy_all}
 
     respond_with(@messages)
   end
