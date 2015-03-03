@@ -17,6 +17,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize @user
     if @user.update_attributes(secure_params)
+
+      # update the text field based on the class_of data
+      @user.year_text = self.get_year_text
+      @user.save
+
       # redirect_to users_path, :notice => "User updated."
 
       #check if file is within picture_path
@@ -58,9 +63,6 @@ class UsersController < ApplicationController
         @user.avatar = uploaded_file
 
         # puts "JHRLOG: avatar has been assigned an upload image"
-
-        # update the text field based on the class_of data
-        @user.year_text = self.get_year_text
 
         if @user.save
           # puts "JHRLOG: avatar has been saved with the image"
