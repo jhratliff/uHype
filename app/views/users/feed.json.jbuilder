@@ -6,9 +6,11 @@ json.array!(@comments) do |comment|
   json.flagged comment.comment_flaggers.include?(@user)
 
   user = User.find(comment.user)
+  json.user_id user.id
   json.user_first_name user.first_name
   json.user_last_name user.last_name
   json.user_username user.username
+  json.user_text_year user.text_year
   json.user_avatar user.avatar.medium.url unless user.avatar.nil?
 
   school = School.find(comment.school)

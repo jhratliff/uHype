@@ -1,4 +1,4 @@
-json.extract! @response[:user], :id, :first_name, :last_name, :class_of, :username, :created_at
+json.extract! @response[:user], :id, :first_name, :last_name, :class_of, :year_text, :username, :created_at
 
 json.avatar_large @response[:user].avatar.large.url
 json.avatar_medium @response[:user].avatar.medium.url
@@ -12,6 +12,7 @@ json.followers @response[:user].followers.order(id: :desc) do | follower |
   json.first_name follower.first_name
   json.last_name follower.last_name
   json.class_of follower.class_of
+  json.year_text follower.year_text
   json.username follower.username
   json.created_at follower.created_at
   json.followers follower.followers.count

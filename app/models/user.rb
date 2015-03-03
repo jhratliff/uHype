@@ -69,6 +69,21 @@ class User < ActiveRecord::Base
     self.send_badge(self.badge_count)
   end
 
+  # fill in the text field for the value in the class_of field
+  def set_year_text
+
+    case self.class_of
+      when "2015"
+        self.year_text = "Senior"
+      when "2016"
+        self.year_text = "Junior"
+      when "2017"
+        self.year_text = "Sophomore"
+      else
+        self.year_text = "Freshman"
+    end
+  end
+
   def send_alert (payload)
 
     if !payload.nil? and payload.length > 0 and !self.endpoint_arn.nil? and self.endpoint_arn.length > 0

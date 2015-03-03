@@ -1,4 +1,4 @@
-json.extract! @user, :id, :authentication_token, :email, :first_name, :last_name, :username, :dob, :class_of, :school_id, :created_at, :followed_schools, :updated_at, :is_private, :is_location_private, :longitude, :latitude
+json.extract! @user, :id, :authentication_token, :email, :first_name, :last_name, :username, :dob, :class_of, :year_text, :school_id, :created_at, :followed_schools, :updated_at, :is_private, :is_location_private, :longitude, :latitude
 
 json.avatar_large @user.avatar.large.url unless @user.avatar.nil?
 json.avatar_medium @user.avatar.medium.url unless @user.avatar.nil?

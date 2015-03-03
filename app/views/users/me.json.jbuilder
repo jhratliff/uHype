@@ -1,4 +1,4 @@
-json.extract! @user, :id, :authentication_token, :email, :first_name, :last_name, :username, :dob, :class_of, :school_id, :created_at, :followed_schools, :updated_at, :is_private, :is_location_private, :longitude, :latitude, :push_token, :action_code
+json.extract! @user, :id, :authentication_token, :email, :first_name, :last_name, :username, :dob, :class_of, :year_text, :school_id, :created_at, :followed_schools, :updated_at, :is_private, :is_location_private, :longitude, :latitude, :push_token, :action_code
 
 json.chat_alerts_received_count @user.chat_alerts_received.count
 

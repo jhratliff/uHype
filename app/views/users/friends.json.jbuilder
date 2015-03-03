@@ -12,6 +12,7 @@ json.friends @response[:user].friends.order(id: :desc) do | friend |
   json.first_name friend.first_name
   json.last_name friend.last_name
   json.class_of friend.class_of
+  json.year_text friend.year_text
   json.username friend.username
   json.created_at friend.created_at
   json.followers friend.followers.count

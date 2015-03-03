@@ -58,6 +58,10 @@ class UsersController < ApplicationController
         @user.avatar = uploaded_file
 
         # puts "JHRLOG: avatar has been assigned an upload image"
+
+        # update the text field based on the class_of data
+        @user.set_year_text
+
         if @user.save
           # puts "JHRLOG: avatar has been saved with the image"
           tempfile.unlink
@@ -93,7 +97,7 @@ class UsersController < ApplicationController
     save_user = false
 
     if (params[:loadme])
-      if (params[:loadme][:version_number])
+      if (params[:loadme][:version_number]) and (params[:loadme][:version_number] != @user.version_number)
         @user.version_number = params[:loadme][:version_number]
         save_user = true
       end
