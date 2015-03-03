@@ -6,5 +6,7 @@ json.array!(@snapshots) do |snapshot|
   json.photo_thumb snapshot.photo.thumb.url
   json.photo_small snapshot.photo.small.url
 
+  json.video_url snapshot.video.url
+
   json.url snapshot_url(snapshot, format: :json)
 end
