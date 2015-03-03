@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     if @user.update_attributes(secure_params)
 
       # update the text field based on the class_of data
-      @user.year_text = self.get_year_text
+      @user.year_text = @user.get_year_text
       @user.save
 
       # redirect_to users_path, :notice => "User updated."
