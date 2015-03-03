@@ -70,18 +70,20 @@ class User < ActiveRecord::Base
   end
 
   # fill in the text field for the value in the class_of field
-  def set_year_text
+  def get_year_text
+
+    return_value = "Freshman"
 
     case self.class_of
       when "2015"
-        self.year_text = "Senior"
+        return_value = "Senior"
       when "2016"
-        self.year_text = "Junior"
+        return_value = "Junior"
       when "2017"
-        self.year_text = "Sophomore"
-      else
-        self.year_text = "Freshman"
+        return_value = "Sophomore"
     end
+
+    return_value
   end
 
   def send_alert (payload)

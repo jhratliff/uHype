@@ -60,7 +60,7 @@ class UsersController < ApplicationController
         # puts "JHRLOG: avatar has been assigned an upload image"
 
         # update the text field based on the class_of data
-        @user.set_year_text
+        @user.year_text = self.get_year_text
 
         if @user.save
           # puts "JHRLOG: avatar has been saved with the image"
