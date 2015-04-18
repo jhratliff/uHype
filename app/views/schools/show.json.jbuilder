@@ -25,4 +25,5 @@ json.comments @school.comments.order(id: :desc) do |comment |
   json.username user.username
   school = School.find(user.school)
   json.user_hs_name school.name
+  json.user_school_logo school.logo.medium.url unless school.logo.nil?
   end
