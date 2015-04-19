@@ -138,10 +138,10 @@ class SnapshotsController < ApplicationController
   end
 
   def destroy
-    @snapshot.likes.each {|like| like.destroy}
-    @snapshot.unlikes.each {|unlike| unlike.destroy}
-    @snapshot.flags.each {|flag| flag.destroy}
-    @snapshot.comments.each {|comment| comment.destroy}
+    @snapshot.snapshot_likes.each {|like| like.destroy}
+    @snapshot.snapshot_unlikes.each {|unlike| unlike.destroy}
+    @snapshot.snapshot_flags.each {|flag| flag.destroy}
+    @snapshot.snapshot_comments.each {|comment| comment.destroy}
     @snapshot.destroy
     respond_with(@snapshot)
   end
