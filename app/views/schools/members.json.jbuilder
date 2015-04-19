@@ -13,6 +13,7 @@ json.users @school.users.order(id: :desc) do |user |
   json.created_at user.created_at
   json.follower_count user.followers.count
   json.class_of user.class_of
+  json.is_private user.is_private
 
   json.following user.followers.include?(@user)
 
