@@ -19,10 +19,10 @@ class UsersController < ApplicationController
     if @user.update_attributes(secure_params)
 
       if (params[:user][:update_token])
-        puts "New password: #{params[:user][:update_token]}"
+        # puts "New password: #{params[:user][:update_token]}"
         @user.update_password (params[:user][:update_token])
       else
-        puts params
+        # puts params
       end
 
       # update the text field based on the class_of data
