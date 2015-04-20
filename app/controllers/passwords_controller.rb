@@ -46,6 +46,8 @@ class PasswordsController < ActionController::Base
         m.text = 'I heard you like pineapple.'
       end
 
+      client.send(mail)
+
 
 
       status = 'Success'
