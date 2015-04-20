@@ -15,19 +15,36 @@ class PasswordsController < ActionController::Base
 
 
 
-      Mail.deliver do
-        to 'jamesr@gmail.com'
-        from 'uHype <noreply@uhype.net>'
-        subject 'This is the subject of your email'
-        text_part do
-          body 'Hello world in text'
-        end
-        html_part do
-          content_type 'text/html; charset=UTF-8'
-          body '<b>Hello world in HTML</b>'
-        end
-      end
+      # Mail.deliver do
+      #   to 'jamesr@gmail.com'
+      #   from 'uHype <noreply@uhype.net>'
+      #   subject 'This is the subject of your email'
+      #   text_part do
+      #     body 'Hello world in text'
+      #   end
+      #   html_part do
+      #     content_type 'text/html; charset=UTF-8'
+      #     body '<b>Hello world in HTML</b>'
+      #   end
+      # end
 
+
+      # As a hash
+      client = SendGrid::Client.new(api_user: ENV['SENDGRID_USERNAME'], api_key: ENV['SENDGRID_PASSWORD'])
+
+      # # Or as a block
+      # client = SendGrid::Client.new do |c|
+      #   c.api_user = 'SENDGRID_USERNAME'
+      #   c.api_key = 'SENDGRID_PASSWORD'
+      # end
+
+
+      mail = SendGrid::Mail.new do |m|
+        m.to = 'jamesr@gmail.com'
+        m.from = 'noreply@uhype.net'
+        m.subject = 'Hello world!'
+        m.text = 'I heard you like pineapple.'
+      end
 
 
 
