@@ -12,6 +12,25 @@ class PasswordsController < ActionController::Base
     if(!email_address.nil?)
       puts ("@@@@@@@@@@@ password is not nil ")
 
+
+
+
+      Mail.deliver do
+        to 'jamesr@gmail.com'
+        from 'uHype <noreply@uhype.net>'
+        subject 'This is the subject of your email'
+        text_part do
+          body 'Hello world in text'
+        end
+        html_part do
+          content_type 'text/html; charset=UTF-8'
+          body '<b>Hello world in HTML</b>'
+        end
+      end
+
+
+
+
       status = 'Success'
       reason = "Check your email (#{email_address}) for the updated password"
 

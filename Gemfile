@@ -28,6 +28,8 @@ gem 'simple_token_authentication'
 
 gem 'bootstrap-generators', '~> 3.2.0'
 
+gem 'mail'
+
 # image handlers
 gem 'mini_magick'
 gem 'fog'
