@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   post "/users/near_me" => "users#near_me"
   post "/users/register_notifications" => "users#register_notifications"
   post "/users/unregister_notifications" => "users#unregister_notifications"
+  post "/users/reset_password" => "users#reset_password"
 
 
   post "/followings/approve/:user_id" => "followings#approve"
