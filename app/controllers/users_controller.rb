@@ -18,9 +18,9 @@ class UsersController < ApplicationController
     authorize @user
     if @user.update_attributes(secure_params)
 
-      if (params[:new_password])
-        puts "New password: #{params[:new_password]}"
-        @user.password = params[:new_password]
+      if (params[:update_token])
+        puts "New password: #{params[:update_token]}"
+        @user.password = params[:update_token]
       else
         puts params
       end
