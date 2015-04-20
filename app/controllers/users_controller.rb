@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
       if (params[:user][:update_token])
         puts "New password: #{params[:user][:update_token]}"
-        @user.password = params[:user][:update_token]
+        @user.update_password (params[:user][:update_token])
       else
         puts params
       end

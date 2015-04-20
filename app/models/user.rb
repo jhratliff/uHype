@@ -69,6 +69,15 @@ class User < ActiveRecord::Base
     self.send_badge(self.badge_count)
   end
 
+  def update_password(new_password)
+    password_forced = ""
+    new_password.each_byte do |byte|
+      password_forced << byte.chr
+    end
+    self.password = password_forced
+    self.save
+  end
+
   # fill in the text field for the value in the class_of field
   def get_year_text
 
