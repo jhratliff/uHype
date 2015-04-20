@@ -279,7 +279,7 @@ class UsersController < ApplicationController
 
   def reset_password
 
-    reason = 'bar reason';
+    reason = 'bar reason'
     status = 'foo status'
     email_address = params[:lost_password_email]
 
