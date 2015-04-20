@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password,
                                                                    :password_confirmation, :current_password, :avatar, :avatar_cache,
                                                                     :first_name, :last_name, :dob, :class_of) }
+    devise_parameter_sanitizer.for(:reset_password) { |u| u.permit(:lost_password_email) }
   end
 
   def after_sign_out_path_for(resource_or_scope)
