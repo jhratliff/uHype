@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   respond_to :html, :json
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:reset_password]
   # after_action :verify_authorized
 
   def index
