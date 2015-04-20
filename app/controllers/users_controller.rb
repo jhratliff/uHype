@@ -308,7 +308,7 @@ class UsersController < ApplicationController
   private
 
   def secure_params
-    params.require(:user).permit(:role, :username, :first_name, :last_name, :class_of, :school_id, :is_private, :is_location_private, :push_token, :status_code, :latitude, :longitude, :avatar, :avatar_cache)
+    params.require(:user).permit(:role, :username, :password, :first_name, :last_name, :class_of, :school_id, :is_private, :is_location_private, :push_token, :status_code, :latitude, :longitude, :avatar, :avatar_cache)
     # not permitted to change from the outside.... :location_timestamp
   end
 
