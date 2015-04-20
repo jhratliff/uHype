@@ -1,1 +1,2 @@
-json.extract! @response[:status], @response[:reason]
+json.status @response[:status]
+json.reason @response[:reason]
