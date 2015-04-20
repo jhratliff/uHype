@@ -1,4 +1,4 @@
-class PasswordsController < ApplicationController
+class PasswordsController < ActionController::Base
   respond_to :json
 
   def reset_password
