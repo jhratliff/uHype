@@ -18,6 +18,10 @@ class UsersController < ApplicationController
     authorize @user
     if @user.update_attributes(secure_params)
 
+      if params[:password]
+        puts "New password: #{params[:password]}"
+      end
+
       # update the text field based on the class_of data
       @user.year_text = @user.get_year_text
       @user.save
